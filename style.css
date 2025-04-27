@@ -318,6 +318,30 @@ img {
     font-style: italic;
 }
 
+/* Travel History Section */
+.travel-history-list {
+    list-style: none;
+    padding: 0;
+}
+
+.travel-history-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+}
+
+.travel-year {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-right: 1rem;
+    min-width: 60px; /* Fixed width for alignment */
+}
+
+.travel-title {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
 /* Language Switcher */
 .lang-switcher {
     position: absolute;
