@@ -407,4 +407,46 @@ img {
         padding: 0;
         width: auto;
     }
+
+    /* Common list item adjustments for mobile */
+    .qualifications-list li,
+    .awards-list li,
+    .education-list li,
+    .media-list li,
+    .travel-history-list li {
+        display: block; /* Change from flex to block for vertical layout */
+        margin-bottom: 1rem; /* Add more space between items */
+    }
+
+    /* Common year adjustments for mobile */
+    .qualification-year,
+    .award-year,
+    .education-year,
+    .media-year,
+    .travel-year {
+        min-width: 0; /* Remove fixed width */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 0.25rem; /* Add space below the year */
+        display: block; /* Ensure it takes its own line if needed */
+    }
+
+    /* Common title adjustments for mobile */
+    .qualification-title,
+    .award-title,
+    .education-title,
+    .media-title,
+    .travel-title {
+        display: block; /* Ensure title takes its own line */
+        margin-right: 0; /* Remove margin inherited from desktop */
+        margin-bottom: 0.25rem; /* Add slight space below title */
+    }
+
+    /* Common description adjustments for mobile */
+    .award-description,
+    .education-description,
+    .media-description {
+        display: block; /* Ensure description takes its own line */
+        margin-left: 0; /* Remove margin inherited from desktop */
+        margin-top: 0.25rem; /* Add space above description */
+    }
 } 
