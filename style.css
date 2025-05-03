@@ -430,6 +430,11 @@ img {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    body {
+        font-size: 95%; /* Slightly reduce base font size */
+        line-height: 1.4; /* Slightly reduce line height */
+    }
+
     .header .container {
         flex-direction: column; /* Stack title and switcher vertically */
         align-items: center; /* Center items */
@@ -442,7 +447,7 @@ img {
 
     .lang-switcher {
         position: static; /* Remove absolute positioning */
-        margin-top: 0.5rem; /* Add some space above buttons */
+        margin-top: 0.25rem; /* Add space above description */
     }
 
     .profile-section .profile-content {
@@ -506,6 +511,7 @@ img {
     .education-title,
     .media-title,
     .travel-title {
+        font-size: 1rem; /* Slightly smaller title font size */
         display: block; /* Ensure title takes its own line */
         margin-right: 0; /* Remove margin inherited from desktop */
         margin-bottom: 0.25rem; /* Add slight space below title */
@@ -515,9 +521,15 @@ img {
     .award-description,
     .education-description,
     .media-description {
+        font-size: 0.85rem; /* Slightly smaller description font size */
         display: block; /* Ensure description takes its own line */
         margin-left: 0; /* Remove margin inherited from desktop */
         margin-top: 0.25rem; /* Add space above description */
+    }
+
+    .section-title {
+        font-size: 1.6rem; /* Reduce section title size */
+        margin-bottom: 1rem; /* Adjust space below title */
     }
 }
 
