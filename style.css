@@ -105,17 +105,18 @@ img {
 .profile-content {
     display: flex;
     align-items: center;
-    gap: 40px; /* Adjust gap between image and text */
+    gap: 50px; /* Increased gap for larger image */
 }
 
 .slideshow-container {
-    width: 200px; /* Adjust size as needed */
-    height: 200px; /* Adjust size as needed */
+    width: 250px; /* Increased size */
+    height: 250px; /* Increased size */
     overflow: hidden; /* Crucial for scroll effect */
     position: relative;
     flex-shrink: 0;
     border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    /* Slightly more defined shadow for a sophisticated look */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .slides-wrapper {
@@ -481,4 +482,30 @@ img {
         margin-left: 0; /* Remove margin inherited from desktop */
         margin-top: 0.25rem; /* Add space above description */
     }
-} 
+}
+
+/* Navigation Dots Styles */
+.navigation-dots {
+    text-align: center;
+    position: absolute;
+    bottom: 10px; /* Position dots at the bottom of the container */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Ensure dots are above the images */
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+/* End Navigation Dots Styles */ 

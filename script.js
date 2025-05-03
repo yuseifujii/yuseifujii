@@ -53,8 +53,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.slideshow-container .slide');
     let currentSlide = 0;
     const numSlides = slides.length;
+    const dotsContainer = document.querySelector('.navigation-dots'); // Get dots container
+    let slideInterval; // Variable to hold the interval ID
 
     if (numSlides > 1) {
+        // Create dots
+        for (let i = 0; i < numSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.dataset.slideIndex = i; // Store index in data attribute
+            dot.addEventListener('click', () => {
+                showSlide(i);
+                resetInterval(); // Reset interval on manual navigation
+            });
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.querySelectorAll('.dot'); // Get all created dots
+
         // Adjust wrapper width dynamically based on number of slides
         slidesWrapper.style.width = `${numSlides * 100}%`;
         // Adjust individual slide width
@@ -62,10 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
             slide.style.width = `${100 / numSlides}%`;
         });
 
+        function updateActiveDot(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
         function showSlide(index) {
             const offset = index * -(100 / numSlides);
             slidesWrapper.style.transform = `translateX(${offset}%)`;
             currentSlide = index; // Update currentSlide index
+            updateActiveDot(index); // Update the active dot
         }
 
         function nextSlide() {
@@ -73,8 +95,17 @@ document.addEventListener('DOMContentLoaded', function() {
             showSlide(nextIndex);
         }
 
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 3000); // Change image every 3 seconds
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
         // Start the slideshow
-        setInterval(nextSlide, 3000); // Change image every 3 seconds
+        startInterval();
         showSlide(0); // Show the first slide initially
     }
 }); 
