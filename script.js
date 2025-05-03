@@ -117,7 +117,7 @@ window.addEventListener('load', () => {
         // Optional: Add a small delay before hiding for smoother transition
         setTimeout(() => {
             preloader.classList.add('loaded');
-        }, 200); // 200ms delay
+        }, 1500); // 1500ms delay (increased from 200ms)
 
         // Ensure it's eventually removed from the flow or fully hidden
         preloader.addEventListener('transitionend', () => {

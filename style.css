@@ -582,17 +582,37 @@ img {
     visibility: hidden; /* Hide after fade out */
 }
 
+/* New Loader: Bouncing Dots */
 .loader {
-    border: 6px solid rgba(255, 255, 255, 0.2); /* Light border */
-    border-left-color: var(--text-light); /* Use light text color for spinner */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+.loader > div {
+    width: 15px;
+    height: 15px;
+    margin: 3px;
+    background-color: var(--text-light); /* Use light text color */
+    border-radius: 100%;
+    display: inline-block;
+    animation: bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.loader .bounce1 {
+    animation-delay: -0.32s;
+}
+
+.loader .bounce2 {
+    animation-delay: -0.16s;
+}
+
+@keyframes bouncedelay {
+    0%, 80%, 100% { 
+        transform: scale(0); 
+    } 40% { 
+        transform: scale(1.0); 
+    }
 }
 
 /* Initially hide main content (optional but recommended) */
