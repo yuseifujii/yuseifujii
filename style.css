@@ -559,4 +559,50 @@ img {
 .dot.active {
     background-color: #717171;
 }
-/* End Navigation Dots Styles */ 
+/* End Navigation Dots Styles */
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color); /* Use primary color for background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.75s ease-out; /* Fade out transition */
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden; /* Hide after fade out */
+}
+
+.loader {
+    border: 6px solid rgba(255, 255, 255, 0.2); /* Light border */
+    border-left-color: var(--text-light); /* Use light text color for spinner */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Initially hide main content (optional but recommended) */
+/* You might need to wrap header, main, footer in a container if you use this */
+/*
+body.loading > *:not(#preloader) {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+body:not(.loading) > *:not(#preloader) {
+    opacity: 1;
+}
+*/ 

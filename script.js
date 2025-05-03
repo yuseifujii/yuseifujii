@@ -108,4 +108,20 @@ document.addEventListener('DOMContentLoaded', function() {
         startInterval();
         showSlide(0); // Show the first slide initially
     }
+});
+
+// Preloader functionality
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Optional: Add a small delay before hiding for smoother transition
+        setTimeout(() => {
+            preloader.classList.add('loaded');
+        }, 200); // 200ms delay
+
+        // Ensure it's eventually removed from the flow or fully hidden
+        preloader.addEventListener('transitionend', () => {
+            preloader.style.display = 'none';
+        });
+    }
 }); 
