@@ -114,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        const fadeOutTime = 1500; // CSS transition duration (ms)
-        const initialDelay = 1500; // Delay before starting fade-out (ms)
+        const fadeOutTime = 1000; // CSS transition duration (ms)
+        const initialDelay = 2000; // Delay before starting fade-out (ms)
 
         setTimeout(() => {
             preloader.classList.add('loaded');

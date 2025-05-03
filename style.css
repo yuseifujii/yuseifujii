@@ -576,7 +576,7 @@ img {
     justify-content: center;
     align-items: center;
     opacity: 1;
-    transition: opacity 1.5s ease-out; /* Fade out transition (increased from 0.75s) */
+    transition: opacity 1s ease-out; /* Fade out transition (changed to 1s) */
 }
 
 #preloader.loaded {
