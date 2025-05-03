@@ -98,41 +98,73 @@ img {
 }
 
 /* Profile Section */
-.profile-section .profile-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+.profile-section {
+    padding: 60px 0;
 }
 
-.profile-image img {
-    width: 180px;
-    height: 180px;
-    border-radius: 0; /* Changed from 50% to 0 for square shape */
+.profile-content {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Adjust gap between image and text */
+}
+
+.slideshow-container {
+    width: 200px; /* Adjust size as needed */
+    height: 200px; /* Adjust size as needed */
+    overflow: hidden; /* Crucial for scroll effect */
+    position: relative;
+    flex-shrink: 0;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slides-wrapper {
+    display: flex;
+    width: 400%; /* Number of slides * 100% */
+    height: 100%;
+    transition: transform 0.5s ease-in-out; /* Animation for scrolling */
+}
+
+.slideshow-container .slide {
+    width: 25%; /* 100% / Number of slides */
+    height: 100%;
     object-fit: cover;
-    border: 5px solid var(--secondary-color);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent slides from shrinking */
+    /* Remove properties related to fade effect */
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
+    /* opacity: 0; */
+    /* transition: opacity 1s ease-in-out; */
+}
+
+/* Remove .slide.active opacity rule */
+/*
+.slideshow-container .slide.active {
+    opacity: 1;
+}
+*/
+
+.profile-details {
+    flex-grow: 1; /* Allow text details to take remaining space */
 }
 
 .profile-details h1 {
-    font-size: 2.5rem; /* Increased size */
-    font-weight: bold; /* h1 is bold by default, but kept for clarity */
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
+    margin: 0;
+    font-size: 2.5em; /* Larger name */
+    color: #333;
 }
 
 .profile-details .english-name {
-    font-size: 1.2rem; /* Slightly smaller than Japanese name */
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
-    font-family: 'Times New Roman', Times, serif; /* Changed to serif font for elegance */
-    letter-spacing: 0.05em; /* Added letter spacing for better readability */
-    text-transform: uppercase; /* Uppercase for a more formal look */
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 10px;
 }
 
 .profile-details .affiliation {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 1rem;
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 /* Timeline (for Education & Awards) */
