@@ -407,10 +407,10 @@ img {
 }
 
 .lang-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--secondary-color);
-    background: transparent;
-    color: var(--secondary-color);
+    padding: 0.6rem 1.2rem; /* Increased padding */
+    border: 1px solid var(--primary-color); /* Darker border */
+    background: var(--light-bg); /* Light background for non-active */
+    color: var(--primary-color); /* Darker text for non-active */
     cursor: pointer;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -420,12 +420,14 @@ img {
 .lang-btn.active {
     background: var(--secondary-color);
     color: white;
+    border-color: var(--secondary-color); /* Ensure active border matches bg */
 }
 
-.lang-btn:hover {
+.lang-btn:hover:not(.active) { /* Style hover only for non-active buttons */
     background: var(--secondary-color);
     color: white;
     opacity: 0.9;
+    border-color: var(--secondary-color);
 }
 
 /* Responsive adjustments */
