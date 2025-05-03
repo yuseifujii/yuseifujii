@@ -581,7 +581,8 @@ img {
 
 #preloader.loaded {
     opacity: 0;
-    visibility: hidden; /* Hide after fade out */
+    /* visibility: hidden; */ /* Removed to ensure fade-out completes */
+    pointer-events: none; /* Prevent interaction during fade */
 }
 
 /* New Loader: Bouncing Dots */
