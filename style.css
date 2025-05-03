@@ -168,6 +168,28 @@ img {
     margin-bottom: 5px;
 }
 
+/* Social Media Links */
+.social-links {
+    margin-top: 15px; /* Add space above the icons */
+}
+
+.social-links a {
+    color: var(--primary-color); /* Use primary color for icons */
+    font-size: 1.8em; /* Adjust icon size */
+    margin-right: 15px; /* Space between icons */
+    transition: color 0.3s ease;
+}
+
+.social-links a:last-child {
+    margin-right: 0;
+}
+
+.social-links a:hover {
+    color: var(--accent-color); /* Change color on hover */
+    text-decoration: none; /* Ensure no underline on hover */
+}
+/* End Social Media Links */
+
 /* Timeline (for Education & Awards) */
 .timeline {
     list-style: none;
