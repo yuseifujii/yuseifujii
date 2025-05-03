@@ -419,9 +419,9 @@ img {
 }
 
 .lang-btn.active {
-    background: var(--secondary-color);
+    background: var(--accent-color); /* Changed from --secondary-color */
     color: white;
-    border-color: var(--secondary-color); /* Ensure active border matches bg */
+    border-color: var(--accent-color); /* Changed from --secondary-color */
 }
 
 .lang-btn:hover:not(.active) { /* Style hover only for non-active buttons */
