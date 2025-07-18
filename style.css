@@ -765,8 +765,8 @@ body {
 @media (max-width: 768px) {
     /* General font size adjustments */
     body {
-        font-size: 15px;
-        line-height: 1.6;
+        font-size: 14px;
+        line-height: 1.4;
     }
 
     h2.section-title {
@@ -799,7 +799,7 @@ body {
         font-size: 1.1em;
     }
     .info-item li {
-        font-size: 0.9em;
+        font-size: 1em;
     }
     .article-title {
         font-size: 1.2em;
