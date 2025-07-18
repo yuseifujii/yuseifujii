@@ -759,6 +759,56 @@ body {
     border-top: 1px solid #e9ecef;
 }
 
+/* =================================================================
+   Responsive Design
+   ================================================================= */
+@media (max-width: 768px) {
+    /* General font size adjustments */
+    body {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    h2.section-title {
+        font-size: 1.8em;
+    }
+    
+    /* Homepage Specifics */
+    .profile-details h1 {
+        font-size: 2.2em;
+    }
+
+    .vision-section .vision-content p {
+        font-size: 1.1em;
+        line-height: 1.7;
+    }
+
+    /* Journal Page Specifics */
+    #journal-overview p {
+        font-size: 1.05em;
+        line-height: 1.7;
+    }
+
+    .metric-value {
+        font-size: 1.4em;
+    }
+    .metric-label {
+        font-size: 0.9em;
+    }
+    .info-item h3 {
+        font-size: 1.1em;
+    }
+    .info-item li {
+        font-size: 0.9em;
+    }
+    .article-title {
+        font-size: 1.2em;
+    }
+    .article-abstract {
+        font-size: 1em;
+    }
+}
+
 .tag {
     font-size: 0.9em;
     padding: 5px 12px;
