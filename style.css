@@ -60,6 +60,22 @@ img {
     align-items: center;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.back-to-profile {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.back-to-profile:hover {
+    text-decoration: underline;
+}
+
 .site-title {
     font-size: 2rem;
     font-weight: bold;
@@ -110,14 +126,13 @@ img {
 }
 
 .slideshow-container {
-    width: 250px; /* Increased size */
-    height: 250px; /* Increased size */
-    overflow: hidden; /* Crucial for scroll effect */
+    width: 200px; /* Adjust as needed */
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
     position: relative;
+    margin-right: 40px;
     flex-shrink: 0;
-    border: none;
-    /* Slightly more defined shadow for a sophisticated look */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .slides-wrapper {
@@ -629,3 +644,97 @@ body:not(.loading) > *:not(#preloader) {
     opacity: 1;
 }
 */ 
+
+/* General Body Styles */
+body {
+    font-family: 'Noto Sans JP', sans-serif; /* Default font */
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .journal-title {
+    font-family: 'Lora', serif; /* Font for headings to give a classic feel */
+}
+
+/* Publication Section & Journal Page */
+.publications-section .btn-view-journal {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.publications-section .btn-view-journal:hover {
+    background-color: #0056b3;
+}
+
+.journal-header {
+    background: #f8f9fa;
+    padding: 20px 0; /* Reduced padding */
+    text-align: center;
+    border-bottom: 2px solid #004085; /* Stronger border */
+}
+
+.journal-title {
+    font-size: 2.5em; /* Slightly smaller */
+    font-weight: bold;
+    color: #004085; /* Darker blue for a more academic feel */
+}
+
+.concept-content {
+    line-height: 1.8;
+    font-size: 1.1em;
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 5px solid #004085;
+    margin-top: 20px;
+}
+
+.article-list {
+    margin-top: 20px;
+}
+
+.article-item {
+    background: #fff;
+    padding: 25px; /* More padding */
+    border: 1px solid #dee2e6; /* Softer border */
+    border-radius: 5px; /* Less rounded */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Subtle shadow */
+    margin-bottom: 25px;
+}
+
+.article-title {
+    font-size: 1.6em; /* Adjusted size */
+    color: #004085;
+    margin-bottom: 10px;
+}
+
+.article-meta {
+    font-style: normal; /* Less emphasis, more professional */
+    font-family: 'Lora', serif;
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.article-abstract {
+    margin-bottom: 20px;
+    font-size: 1.05em;
+}
+
+.btn-read-more {
+    display: inline-block;
+    background-color: #0056b3; /* Consistent blue */
+    color: white;
+    padding: 10px 18px; /* Bigger button */
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-read-more:hover {
+    background-color: #004085; /* Darker shade on hover */
+} 
