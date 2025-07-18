@@ -122,17 +122,16 @@ img {
 .profile-content {
     display: flex;
     align-items: center;
-    gap: 50px; /* Increased gap for larger image */
+    gap: 50px;
 }
 
 .slideshow-container {
-    width: 250px; /* Increased size */
-    height: 250px; /* Increased size */
-    overflow: hidden; /* Crucial for scroll effect */
+    width: 250px; 
+    height: 250px;
+    overflow: hidden;
     position: relative;
     flex-shrink: 0;
     border: none;
-    /* Slightly more defined shadow for a sophisticated look */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
@@ -738,4 +737,22 @@ h1, h2, h3, .journal-title {
 
 .btn-read-more:hover {
     background-color: #004085; /* Darker shade on hover */
+}
+
+/* Vision Section */
+.vision-section .vision-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.vision-section .vision-content p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Lora', serif;
 } 
