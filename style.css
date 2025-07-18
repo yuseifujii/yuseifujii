@@ -122,17 +122,17 @@ img {
 .profile-content {
     display: flex;
     align-items: center;
-    gap: 50px; /* Increased gap for larger image */
 }
 
 .slideshow-container {
-    width: 200px; /* Adjust as needed */
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
+    width: 250px; /* Increased size */
+    height: 250px; /* Increased size */
+    overflow: hidden; /* Crucial for scroll effect */
     position: relative;
-    margin-right: 40px;
     flex-shrink: 0;
+    border: none;
+    /* Slightly more defined shadow for a sophisticated look */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .slides-wrapper {
