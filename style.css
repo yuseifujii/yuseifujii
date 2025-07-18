@@ -122,6 +122,7 @@ img {
 .profile-content {
     display: flex;
     align-items: center;
+    gap: 50px; /* Increased gap for larger image */
 }
 
 .slideshow-container {
