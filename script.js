@@ -110,30 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Preloader functionality
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        const fadeOutTime = 1000; // CSS transition duration (ms)
-        const initialDelay = 2000; // Delay before starting fade-out (ms)
-
-        setTimeout(() => {
-            preloader.classList.add('loaded');
-
-            // Set display: none *after* the fade-out transition completes
-            setTimeout(() => {
-                if (preloader) { // Check if preloader still exists
-                    preloader.style.display = 'none';
-                }
-            }, fadeOutTime); // Wait for the fade-out defined in CSS
-
-        }, initialDelay); // Start fade-out after this delay
-
-        // Remove the previous transitionend listener
-        /*
-        preloader.addEventListener('transitionend', () => {
-            preloader.style.display = 'none';
-        });
-        */
-    }
+// Preloader fade out
+window.addEventListener('load', function() {
+    // This is no longer needed
 }); 
