@@ -47,9 +47,10 @@ img {
 
 /* Header styles */
 .header {
-    background-color: #fff;
-    padding: 10px 0;
-    border-bottom: 1px solid #eaeaea;
+    background-image: linear-gradient(135deg, #003366 0%, #001f3f 100%); /* Dark blue gradient */
+    color: #fff;
+    padding: 1rem 0;
+    border-bottom: 3px solid #ffc107; /* Assuming a gold/secondary color */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -68,6 +69,19 @@ img {
 .logo-image {
     height: 40px; /* Adjust as needed */
     width: auto;
+    filter: brightness(0) invert(1); /* Ensure logo is white if it's not already */
+}
+
+.page-title-container {
+    padding: 3rem 0 1rem;
+    text-align: center;
+}
+
+.page-main-title {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Lora', serif; /* Example of a more stylized font */
 }
 
 .site-title {
@@ -885,4 +899,62 @@ body {
 
 .award-title.emphasized {
     font-weight: bold;
+} 
+
+/* Landing Page Specific Styles */
+.landing-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Makes main content take up available space */
+    min-height: calc(100vh - 120px); /* Adjust 120px based on header/footer height */
+}
+
+.card-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.nav-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #333;
+    width: 300px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.card-icon {
+    font-size: 3em;
+    color: #003366; /* Dark blue from header */
+    margin-bottom: 20px;
+}
+
+.card-content h2 {
+    font-size: 1.8em;
+    margin: 0 0 10px;
+}
+
+.card-content p {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* Ensure body takes full height for vertical centering */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 } 

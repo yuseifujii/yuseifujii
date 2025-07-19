@@ -8,51 +8,55 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background-color: #f4f4f4;
-            font-family: sans-serif;
-        }
-        .landing-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .landing-logo img {
-            max-width: 400px;
-            margin-bottom: 40px;
-        }
-        .nav-links a {
-            display: inline-block;
-            margin: 0 15px;
-            padding: 15px 30px;
-            border: 2px solid #333;
-            text-decoration: none;
-            color: #333;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-        }
-        .nav-links a:hover {
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="landing-container">
-        <div class="landing-logo">
-            <img src="logo.png" alt="Yusei Fujii Official Website">
+
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo-link"><img src="logo.png" alt="Yusei Fujii Home" class="logo-image"></a>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="ja">日本語</button>
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="/profile">Profile</a>
-            <a href="/publication">Publications</a>
+    </header>
+
+    <main class="landing-main">
+        <div class="container">
+            <div class="card-navigation">
+                <a href="/profile" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2 data-ja="プロフィール" data-en="Profile">Profile</h2>
+                        <p data-ja="経歴、受賞歴、活動について" data-en="Learn about my career, awards, and activities.">
+                            Learn about my career, awards, and activities.
+                        </p>
+                    </div>
+                </a>
+                <a href="/publication" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2 data-ja="出版物" data-en="Publications">Publications</h2>
+                        <p data-ja="研究成果を公開するジャーナル" data-en="A journal for publishing my research findings.">
+                            A journal for publishing my research findings.
+                        </p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Yusei Fujii. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html> 
