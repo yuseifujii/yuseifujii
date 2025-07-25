@@ -492,7 +492,7 @@ img {
 
         --spacing-m: 0.75rem;
         --spacing-l: 1.1rem;
-        --spacing-xl: 2.2rem;
+        --spacing-xl: 2.5rem;
     }
 
     body {
@@ -880,6 +880,7 @@ body {
     justify-content: center;
     flex-grow: 1; /* Makes main content take up available space */
     min-height: calc(100vh - 120px); /* Adjust 120px based on header/footer height */
+    padding: var(--spacing-xl) 0;
 }
 
 .card-navigation {
