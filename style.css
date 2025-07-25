@@ -8,7 +8,7 @@
 body {
     /* Updated font-family for Mincho style */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif;
-    line-height: 1.5; /* Reduced line-height for tighter spacing */
+    line-height: var(--lh-base); /* Reduced line-height for tighter spacing */
     color: var(--text-dark); /* Use dark text color from variables */
     background-color: #f8f9fa; /* Slightly adjusted background for formality */
 }
@@ -16,7 +16,7 @@ body {
 .container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--spacing-l); /* 24px */
 }
 
 a {
@@ -43,13 +43,34 @@ img {
     --text-light: #f8f9fa;
     --text-dark: #343a40;
     --border-color: #dee2e6;
+
+    /* Sizing & Spacing Variables */
+    --spacing-xs: 0.25rem;  /* 4px */
+    --spacing-s: 0.5rem;   /* 8px */
+    --spacing-m: 1rem;     /* 16px */
+    --spacing-l: 1.5rem;   /* 24px */
+    --spacing-xl: 3rem;    /* 48px */
+
+    /* Font Sizes */
+    --fs-base: 1rem; /* Base font size, typically 16px */
+    --fs-sm: 0.9rem;
+    --fs-lg: 1.1rem;
+    --fs-xl: 1.2rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 1.8rem;
+    --fs-4xl: 2.5em;
+    --fs-5xl: 2.8em;
+
+    /* Line Heights */
+    --lh-base: 1.5;
+    --lh-heading: 1.2;
 }
 
 /* Header styles */
 .header {
     background-image: linear-gradient(135deg, #003366 0%, #001f3f 100%); /* Dark blue gradient */
     color: #fff;
-    padding: 1rem 0;
+    padding: var(--spacing-m) 0;
     border-bottom: 3px solid #ffc107; /* Assuming a gold/secondary color */
     position: sticky;
     top: 0;
@@ -73,12 +94,12 @@ img {
 }
 
 .page-title-container {
-    padding: 3rem 0 1rem;
+    padding: var(--spacing-xl) 0 var(--spacing-m);
     text-align: center;
 }
 
 .page-main-title {
-    font-size: 2.8em;
+    font-size: var(--fs-5xl);
     font-weight: bold;
     color: #333;
     font-family: 'Lora', serif; /* Example of a more stylized font */
@@ -86,7 +107,7 @@ img {
 
 .site-title {
     margin: 0;
-    font-size: 1.5em;
+    font-size: var(--fs-2xl);
     font-weight: bold;
 }
 
@@ -95,14 +116,14 @@ img {
     background-color: var(--secondary-color);
     color: var(--text-light);
     text-align: center;
-    padding: 1rem 0;
-    margin-top: 3rem;
-    font-size: 0.9em;
+    padding: var(--spacing-m) 0;
+    margin-top: var(--spacing-xl);
+    font-size: var(--fs-sm);
 }
 
 /* Sections */
 .section {
-    padding: 3rem 0;
+    padding: var(--spacing-xl) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -115,23 +136,23 @@ img {
 }
 
 .section-title {
-    font-size: 1.8rem;
+    font-size: var(--fs-3xl);
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: var(--spacing-l);
+    padding-bottom: var(--spacing-s);
     border-bottom: 2px solid var(--accent-color);
     display: inline-block;
 }
 
 /* Profile Section */
 .profile-section {
-    padding: 60px 0;
+    padding: var(--spacing-xl) 0;
 }
 
 .profile-content {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: var(--spacing-xl);
 }
 
 .slideshow-container {
@@ -177,31 +198,31 @@ img {
 
 .profile-details h1 {
     margin: 0;
-    font-size: 2.5em; /* Larger name */
+    font-size: var(--fs-4xl); /* Larger name */
     color: #333;
 }
 
 .profile-details .english-name {
-    font-size: 1.2em;
+    font-size: var(--fs-xl);
     color: #555;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-s);
 }
 
 .profile-details .affiliation {
-    font-size: 1.1em;
+    font-size: var(--fs-lg);
     color: #666;
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
 }
 
 /* Social Media Links */
 .social-links {
-    margin-top: 15px; /* Add space above the icons */
+    margin-top: var(--spacing-l); /* Add space above the icons */
 }
 
 .social-links a {
     color: var(--primary-color); /* Use primary color for icons */
-    font-size: 1.8em; /* Adjust icon size */
-    margin-right: 15px; /* Space between icons */
+    font-size: var(--fs-3xl); /* Adjust icon size */
+    margin-right: var(--spacing-l); /* Space between icons */
     transition: color 0.3s ease;
 }
 
@@ -234,9 +255,9 @@ img {
 }
 
 .timeline li {
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Keeping specific value for now */
     position: relative;
-    padding-left: 60px; /* Space for year/icon */
+    padding-left: 60px; /* Space for year/icon, kept for layout precision */
 }
 
 .timeline li::before {
@@ -255,7 +276,7 @@ img {
 
 .timeline-content {
     background-color: #fff;
-    padding: 1.5rem;
+    padding: var(--spacing-l);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
@@ -276,9 +297,9 @@ img {
 }
 
 .timeline-title {
-    font-size: 1.2rem;
+    font-size: var(--fs-xl);
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
 }
 
 /* Qualifications Section */
@@ -288,7 +309,7 @@ img {
 }
 
 .qualifications-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
     display: flex;
     align-items: baseline;
 }
@@ -296,12 +317,12 @@ img {
 .qualification-year {
     font-weight: bold;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
     min-width: 60px; /* Fixed width for alignment */
 }
 
 .qualification-title {
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     color: var(--text-dark);
 }
 
@@ -312,7 +333,7 @@ img {
 }
 
 .awards-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
     display: flex;
     align-items: baseline;
 }
@@ -320,18 +341,18 @@ img {
 .award-year {
     font-weight: bold;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
     min-width: 60px; /* Fixed width for alignment */
 }
 
 .award-title {
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     color: var(--text-dark);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
 }
 
 .award-description {
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     color: #666;
     font-style: italic;
 }
@@ -343,7 +364,7 @@ img {
 }
 
 .education-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
     display: flex;
     align-items: baseline;
 }
@@ -351,19 +372,19 @@ img {
 .education-year {
     font-weight: bold;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
     min-width: 60px; /* Fixed width for alignment */
 }
 
 .education-title {
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     color: var(--text-dark);
 }
 
 .education-description {
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     color: #666;
-    margin-left: 0.5rem;
+    margin-left: var(--spacing-s);
     font-style: italic;
 }
 
@@ -374,7 +395,7 @@ img {
 }
 
 .media-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
     display: flex;
     align-items: baseline;
 }
@@ -382,18 +403,18 @@ img {
 .media-year {
     font-weight: bold;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
     min-width: 60px; /* Fixed width for alignment */
 }
 
 .media-title {
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     color: var(--text-dark);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
 }
 
 .media-description {
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     color: #666;
     font-style: italic;
 }
@@ -405,7 +426,7 @@ img {
 }
 
 .travel-history-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-s);
     display: flex;
     align-items: baseline;
 }
@@ -413,32 +434,32 @@ img {
 .travel-year {
     font-weight: bold;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-m);
     min-width: 60px; /* Fixed width for alignment */
 }
 
 .travel-title {
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     color: var(--text-dark);
 }
 
 /* Language Switcher */
 .lang-switcher {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: var(--spacing-m);
+    right: var(--spacing-m);
     display: flex;
-    gap: 0.5rem;
+    gap: var(--spacing-s);
 }
 
 .lang-btn {
-    padding: 0.6rem 1.2rem; /* Increased padding */
+    padding: 0.6rem 1.2rem; /* Keeping specific value for button sizing */
     border: 1px solid var(--primary-color); /* Darker border */
     background: var(--light-bg); /* Light background for non-active */
     color: var(--primary-color); /* Darker text for non-active */
     cursor: pointer;
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     transition: all 0.3s ease;
 }
 
@@ -458,7 +479,7 @@ img {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 14px; /* Base font for mobile */
         line-height: 1.4;
     }
 
@@ -468,27 +489,27 @@ img {
     }
 
     .site-title {
-        margin-bottom: 1rem; /* Add space below title */
+        margin-bottom: var(--spacing-m); /* Add space below title */
         text-align: center; /* Center title text */
     }
 
     .lang-switcher {
         position: static; /* Remove absolute positioning */
-        margin-top: 0.25rem; /* Add space above description */
+        margin-top: var(--spacing-xs); /* Add space above description */
     }
 
     .profile-section {
-        padding: 40px 0;
+        padding: var(--spacing-xl) 0;
     }
 
     .profile-section .profile-content {
         flex-direction: column;
         text-align: center;
-        gap: 30px;
+        gap: var(--spacing-l);
     }
 
     .profile-image img {
-        margin-bottom: 1rem;
+        margin-bottom: var(--spacing-m);
     }
 
     .timeline::before {
@@ -506,7 +527,7 @@ img {
     .timeline-year {
         position: static;
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-s);
         background-color: transparent;
         color: var(--secondary-color);
         font-weight: bold;
@@ -522,7 +543,7 @@ img {
     .media-list li,
     .travel-history-list li {
         display: block; /* Change from flex to block for vertical layout */
-        margin-bottom: 1rem; /* Add more space between items */
+        margin-bottom: var(--spacing-m); /* Add more space between items */
     }
 
     /* Common year adjustments for mobile */
@@ -533,7 +554,7 @@ img {
     .travel-year {
         min-width: 0; /* Remove fixed width */
         margin-right: 0; /* Remove right margin */
-        margin-bottom: 0.25rem; /* Add space below the year */
+        margin-bottom: var(--spacing-xs); /* Add space below the year */
         display: block; /* Ensure it takes its own line if needed */
     }
 
@@ -543,10 +564,10 @@ img {
     .education-title,
     .media-title,
     .travel-title {
-        font-size: 1rem; /* Slightly smaller title font size */
+        font-size: var(--fs-base); /* Slightly smaller title font size */
         display: block; /* Ensure title takes its own line */
         margin-right: 0; /* Remove margin inherited from desktop */
-        margin-bottom: 0.25rem; /* Add slight space below title */
+        margin-bottom: var(--spacing-xs); /* Add slight space below title */
     }
 
     /* Common description adjustments for mobile */
@@ -556,16 +577,16 @@ img {
         font-size: 0.85rem; /* Slightly smaller description font size */
         display: block; /* Ensure description takes its own line */
         margin-left: 0; /* Remove margin inherited from desktop */
-        margin-top: 0.25rem; /* Add space above description */
+        margin-top: var(--spacing-xs); /* Add space above description */
     }
 
     .section-title {
         font-size: 1.4rem; /* Reduce section title size */
-        margin-bottom: 1rem; /* Adjust space below title */
+        margin-bottom: var(--spacing-m); /* Adjust space below title */
     }
 
     h2.section-title {
-        font-size: 1.5em;
+        font-size: var(--fs-2xl);
     }
     
     /* Homepage Specifics */
@@ -574,13 +595,13 @@ img {
     }
 
     .vision-section .vision-content p {
-        font-size: 1em;
+        font-size: var(--fs-base);
         line-height: 1.6;
     }
 
     /* Journal Page Specifics */
     #journal-overview p {
-        font-size: 1em;
+        font-size: var(--fs-base);
         line-height: 1.6;
     }
 
@@ -588,23 +609,23 @@ img {
         font-size: 1.3em;
     }
     .metric-label {
-        font-size: 0.9em;
+        font-size: var(--fs-sm);
     }
     .info-item h3 {
-        font-size: 1.1em;
+        font-size: var(--fs-lg);
     }
     .info-item li {
         font-size: 0.95em;
     }
     .article-title {
-        font-size: 1.1em;
+        font-size: var(--fs-xl);
     }
     .article-abstract {
         font-size: 0.95em;
     }
 
     .card-navigation {
-        gap: 20px;
+        gap: var(--spacing-l);
     }
 }
 
@@ -624,7 +645,7 @@ img {
     height: 10px;
     background-color: #bbb;
     border-radius: 50%;
-    margin: 0 5px;
+    margin: 0 var(--spacing-xs);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -667,7 +688,7 @@ body {
 
 #journal-overview .container {
     border: 1px solid #dee2e6;
-    padding: 30px;
+    padding: var(--spacing-l);
     border-radius: 8px;
     background: #fff;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -675,31 +696,31 @@ body {
 
 #journal-overview .section-title {
     text-align: left;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    padding-bottom: 10px;
+    margin-bottom: var(--spacing-l);
+    font-size: var(--fs-2xl);
+    padding-bottom: var(--spacing-s);
     border-bottom: 1px solid #dee2e6;
 }
 
 #journal-overview p {
-    margin-bottom: 30px;
+    margin-bottom: var(--spacing-l);
 }
 
 .journal-details {
-    margin-top: 20px;
+    margin-top: var(--spacing-l);
 }
 
 .metrics-grid {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--spacing-l);
 }
 
 .metric-item {
     display: flex;
     align-items: center;
     border-left: 4px solid #0056b3;
-    padding-left: 15px;
+    padding-left: var(--spacing-l);
 }
 
 .metric-item:not(:first-child) {
@@ -707,31 +728,31 @@ body {
 }
 
 .metric-value {
-    font-size: 1.5em;
+    font-size: var(--fs-2xl);
     font-weight: 700;
     color: #333;
-    margin-right: 10px;
+    margin-right: var(--spacing-s);
 }
 
 .metric-label {
-    font-size: 1em;
+    font-size: var(--fs-base);
     color: #555;
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-    padding-top: 30px;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
     border-top: 1px solid #e9ecef;
 }
 
 .info-item h3 {
-    font-size: 1.2em;
+    font-size: var(--fs-xl);
     font-weight: bold;
     color: #004085;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-s);
 }
 
 .info-item ul {
@@ -740,21 +761,21 @@ body {
 }
 
 .info-item li {
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
     font-size: 0.95em;
 }
 
 .journal-tags {
     display: flex;
     justify-content: flex-start;
-    gap: 15px;
-    margin-top: 30px;
-    padding-top: 20px;
+    gap: var(--spacing-l);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-l);
     border-top: 1px solid #e9ecef;
 }
 
 .tag {
-    font-size: 0.9em;
+    font-size: var(--fs-sm);
     padding: 5px 12px;
     border-radius: 15px;
     font-weight: 500;
@@ -771,33 +792,33 @@ body {
 }
 
 .article-list {
-    margin-top: 20px;
+    margin-top: var(--spacing-l);
 }
 
 .article-item {
     background: #fff;
-    padding: 25px;
+    padding: var(--spacing-l);
     border: 1px solid #dee2e6;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    margin-bottom: 25px;
+    margin-bottom: var(--spacing-l);
 }
 
 .article-title {
     font-size: 1.6em;
     color: #004085;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-s);
 }
 
 .article-meta {
     font-style: normal;
     color: #555;
-    margin-bottom: 15px;
-    font-size: 0.9em;
+    margin-bottom: var(--spacing-l);
+    font-size: var(--fs-sm);
 }
 
 .article-abstract {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-l);
     font-size: 1.05em;
 }
 
@@ -818,14 +839,14 @@ body {
 /* Vision Section */
 .vision-section .vision-content {
     background: #fff;
-    padding: 30px;
+    padding: var(--spacing-xl);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     text-align: center;
 }
 
 .vision-section .vision-content p {
-    font-size: 1.2em;
+    font-size: var(--fs-xl);
     line-height: 1.8;
     color: #333;
     max-width: 800px;
@@ -848,7 +869,7 @@ body {
 .card-navigation {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: var(--spacing-xl);
     flex-wrap: wrap;
 }
 
@@ -860,7 +881,7 @@ body {
     text-decoration: none;
     color: #333;
     width: 300px;
-    padding: 30px;
+    padding: var(--spacing-xl);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -873,17 +894,17 @@ body {
 .card-icon {
     font-size: 3em;
     color: #003366; /* Dark blue from header */
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-l);
 }
 
 .card-content h2 {
-    font-size: 1.8em;
-    margin: 0 0 10px;
+    font-size: var(--fs-3xl);
+    margin: 0 0 var(--spacing-s);
 }
 
 .card-content p {
-    font-size: 1em;
-    line-height: 1.5;
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
     color: #666;
 }
 
