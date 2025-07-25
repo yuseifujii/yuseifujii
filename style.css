@@ -515,8 +515,7 @@ img {
     }
 
     .profile-section {
-        padding-top: var(--spacing-xl);
-        padding-bottom: var(--spacing-xl);
+        padding: var(--spacing-xl) 0;
     }
 
     .profile-section .profile-content {
