@@ -458,8 +458,8 @@ img {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     body {
-        font-size: 95%; /* Slightly reduce base font size */
-        line-height: 1.4; /* Slightly reduce line height */
+        font-size: 14px;
+        line-height: 1.4;
     }
 
     .header .container {
@@ -477,9 +477,14 @@ img {
         margin-top: 0.25rem; /* Add space above description */
     }
 
+    .profile-section {
+        padding: 40px 0;
+    }
+
     .profile-section .profile-content {
         flex-direction: column;
         text-align: center;
+        gap: 30px;
     }
 
     .profile-image img {
@@ -555,8 +560,51 @@ img {
     }
 
     .section-title {
-        font-size: 1.6rem; /* Reduce section title size */
+        font-size: 1.4rem; /* Reduce section title size */
         margin-bottom: 1rem; /* Adjust space below title */
+    }
+
+    h2.section-title {
+        font-size: 1.5em;
+    }
+    
+    /* Homepage Specifics */
+    .profile-details h1 {
+        font-size: 2em;
+    }
+
+    .vision-section .vision-content p {
+        font-size: 1em;
+        line-height: 1.6;
+    }
+
+    /* Journal Page Specifics */
+    #journal-overview p {
+        font-size: 1em;
+        line-height: 1.6;
+    }
+
+    .metric-value {
+        font-size: 1.3em;
+    }
+    .metric-label {
+        font-size: 0.9em;
+    }
+    .info-item h3 {
+        font-size: 1.1em;
+    }
+    .info-item li {
+        font-size: 0.95em;
+    }
+    .article-title {
+        font-size: 1.1em;
+    }
+    .article-abstract {
+        font-size: 0.95em;
+    }
+
+    .card-navigation {
+        gap: 20px;
     }
 }
 
@@ -703,56 +751,6 @@ body {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #e9ecef;
-}
-
-/* =================================================================
-   Responsive Design
-   ================================================================= */
-@media (max-width: 768px) {
-    /* General font size adjustments */
-    body {
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    h2.section-title {
-        font-size: 1.8em;
-    }
-    
-    /* Homepage Specifics */
-    .profile-details h1 {
-        font-size: 2.2em;
-    }
-
-    .vision-section .vision-content p {
-        font-size: 1.1em;
-        line-height: 1.7;
-    }
-
-    /* Journal Page Specifics */
-    #journal-overview p {
-        font-size: 1.05em;
-        line-height: 1.7;
-    }
-
-    .metric-value {
-        font-size: 1.4em;
-    }
-    .metric-label {
-        font-size: 0.9em;
-    }
-    .info-item h3 {
-        font-size: 1.1em;
-    }
-    .info-item li {
-        font-size: 1em;
-    }
-    .article-title {
-        font-size: 1.2em;
-    }
-    .article-abstract {
-        font-size: 1em;
-    }
 }
 
 .tag {
