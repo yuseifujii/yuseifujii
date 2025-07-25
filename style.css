@@ -8,6 +8,7 @@
 body {
     /* Updated font-family for Mincho style */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif;
+    font-size: var(--fs-base);
     line-height: var(--lh-base); /* Reduced line-height for tighter spacing */
     color: var(--text-dark); /* Use dark text color from variables */
     background-color: #f8f9fa; /* Slightly adjusted background for formality */
@@ -478,8 +479,23 @@ img {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    :root {
+        /* Mobile-specific variable overrides */
+        --fs-base: 0.875rem; /* 14px */
+        --fs-sm: 0.8rem;
+        --fs-lg: 0.95rem;
+        --fs-xl: 1rem;
+        --fs-2xl: 1.2rem;
+        --fs-3xl: 1.4rem;
+        --fs-4xl: 2rem;
+        --fs-5xl: 2.2rem;
+
+        --spacing-m: 0.75rem;
+        --spacing-l: 1.1rem;
+        --spacing-xl: 2.2rem;
+    }
+
     body {
-        font-size: 14px; /* Base font for mobile */
         line-height: 1.4;
     }
 
