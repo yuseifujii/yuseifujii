@@ -497,7 +497,7 @@ img {
 
     /* Hero section adjustments for mobile */
     .page-hero {
-        padding: 1rem 0; /* Reduced padding for mobile */
+        padding: 0.5rem 0; /* Further reduced padding for mobile */
     }
 
     .page-hero .page-main-title {
