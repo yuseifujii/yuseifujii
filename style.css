@@ -793,7 +793,7 @@ body {
 .journal-tags {
     display: flex;
     justify-content: flex-start;
-    gap: var(--spacing-l);
+    gap: var(--spacing-s);
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-l);
     border-top: 1px solid #e9ecef;
@@ -818,6 +818,11 @@ body {
 
 .tag-article-type {
     background-color: #28a745; /* Green for article type */
+    color: #fff;
+}
+
+.tag-lang {
+    background-color: var(--accent-color);
     color: #fff;
 }
 
