@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const slideshow = document.querySelector('.slides-wrapper');
     const dotsContainer = document.querySelector('.navigation-dots');
     const langButtons = document.querySelectorAll('.lang-btn');
-    const translatableElements = document.querySelectorAll('[data-ja]');
 
     if (slideshow && dotsContainer) {
         const slides = Array.from(slideshow.children);
@@ -49,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Language switcher logic
     // Function to set the language
     function setLanguage(lang) {
+        const translatableElements = document.querySelectorAll('[data-ja]');
         translatableElements.forEach(el => {
             const text = el.getAttribute(`data-${lang}`);
             if (text) {
