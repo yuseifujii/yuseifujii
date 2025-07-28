@@ -816,6 +816,11 @@ body {
     color: #fff;
 }
 
+.tag-article-type {
+    background-color: #28a745; /* Green for article type */
+    color: #fff;
+}
+
 .article-list {
     margin-top: var(--spacing-l);
 }
