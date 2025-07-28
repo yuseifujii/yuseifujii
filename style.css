@@ -866,6 +866,22 @@ body {
     flex-grow: 1;
 }
 
+#article-viewer .container {
+    max-width: 1200px;
+}
+
+.article-title-main {
+    font-size: var(--fs-4xl);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-s);
+}
+
+.pdf-viewer {
+    margin-top: var(--spacing-l);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
 .article-title {
     font-size: 1.6em;
     color: #004085;
