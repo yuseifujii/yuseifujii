@@ -821,6 +821,13 @@ body {
     color: #fff;
 }
 
+.article-item .journal-tags {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: var(--spacing-m);
+}
+
 .article-list {
     margin-top: var(--spacing-l);
 }
