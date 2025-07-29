@@ -652,6 +652,10 @@ img {
     .card-navigation {
         gap: var(--spacing-l);
     }
+    
+    .article-item {
+        flex-direction: column;
+    }
 }
 
 /* Navigation Dots Styles */
