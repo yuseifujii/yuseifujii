@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="journal-tags">
                         <span class="tag tag-article-type" data-ja="${article.type_ja}" data-en="${article.type_en}">${article.type_en}</span>
                         <span class="tag tag-lang" data-ja="${article.lang_ja}" data-en="${article.lang_en}">${article.lang_en}</span>
-                        ${article.lang2_en ? `<span class="tag tag-lang" data-en="${article.lang2_en}">${article.lang2_en}</span>` : ''}
+                        ${article.lang2_en ? `<span class="tag tag-lang" data-ja="${article.lang2_ja}" data-en="${article.lang2_en}">${article.lang2_en}</span>` : ''}
                     </div>
                     <h3 class="article-title" data-ja="${article.title_ja}" data-en="${article.title_en}">${article.title_en}</h3>
                     <p class="article-meta">
