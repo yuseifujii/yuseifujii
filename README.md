@@ -28,8 +28,8 @@ I’m passionate about **mathematical research** and **AI service development**.
 ## 📘 Projects / プロジェクト例
 - [ToreMock](https://toremock.com): 自作AI英語模試サービス
 - [web記事自動生成ツール](https://guthub.com/yuseifujii/toremock2/imagen4.py): SEOを意識した教育記事の自動生成
-- [ショート動画自動生成ツール](https://guthub.com/yuseifujii/toremock-video): YouTube, TikTok向けのショート動画の自動生成
-- [ポスト自動生成ツール](https://guthub.com/yuseifujii/x-automation): Xのポストの自動生成
+- [ショート動画自動生成ツール](https://github.com/yuseifujii/video-generator): YouTube, TikTok向けのショート動画の自動生成
+- [ポスト自動生成ツール](https://github.com/yuseifujii/x-automation): Xのポストの自動生成
 - [論文：断頭多角柱と重心に関する幾何学的定理の発見](https://arxiv.org/): 2年間の立体幾何学の研究 @静岡大学理学部
 - [高校の数学研究会のwebサイト](https://yfit.jp): 代表を務める数学研究会『かずけん』の文化祭用webサイト
 - [Fujii Journal of Mathematics](https://yuseifujii.com/publication): 独自の数学ジャーナル
