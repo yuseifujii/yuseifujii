@@ -2,7 +2,7 @@ const articles = [
     {
         id: "parabola-normal-line",
         title_ja: "放物線の法線に関するシンプルで興味深い問題",
-        title_en: "A Simple and Interesting Problem Regarding the Normal Line of a Parabola",
+        title_en: "Simple and Interesting Problems on Normals to Parabolas",
         author: "Yusei Fujii",
         date: "2025-07-29",
         abstract_ja: "放物線の法線に関するシンプルで興味深い自作問題を詳細に解説します。",
@@ -11,7 +11,8 @@ const articles = [
         type_en: "Problem and Solution",
         lang_ja: "日本語",
         lang_en: "Japanese",
-        pdf_path: "Yusei Fujii - Normal Line of Parabola.pdf",
+        pdf_path_ja: "Yusei Fujii - Normal Line of Parabola (JP).pdf",
+        pdf_path_en: "Yusei Fujii - Normal Line of Parabola (EN).pdf",
         cover_image: "Cover - Normal Line of Parabola.png",
         alt_text: "Cover image for the parabola article"
     },
@@ -27,7 +28,8 @@ const articles = [
         type_en: "Report",
         lang_ja: "日本語",
         lang_en: "Japanese",
-        pdf_path: "#",
+        pdf_path_ja: "#",
+        pdf_path_en: "#",
         cover_image: null,
         alt_text: "Placeholder for cover image"
     }

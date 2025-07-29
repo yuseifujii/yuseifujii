@@ -116,7 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="date-published">Published: ${article.date}</span>
                     </p>
                     <p class="article-abstract" data-ja="${article.abstract_ja}" data-en="${article.abstract_en}">${article.abstract_en}</p>
-                    <a href="publication/article.html?id=${article.id}" class="btn-read-more" data-ja="閲覧する" data-en="View">View</a>
+                    <div class="article-actions">
+                        <a href="publication/article.html?id=${article.id}&lang=ja" class="btn-read-more" data-ja="日本語版を閲覧" data-en="View Japanese PDF">View Japanese PDF</a>
+                        <a href="publication/article.html?id=${article.id}&lang=en" class="btn-read-more" data-ja="英語版を閲覧" data-en="View English PDF">View English PDF</a>
+                    </div>
                 </div>
             `;
 
@@ -129,11 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderArticlePage() {
         const urlParams = new URLSearchParams(window.location.search);
         const articleId = urlParams.get('id');
+        const lang = urlParams.get('lang') || 'ja'; // Default to Japanese
         const article = articles.find(a => a.id === articleId);
 
         if (article) {
             document.title = `${article.title_en} | Fujii Journal of Mathematics`;
             
+            const pdfPath = lang === 'en' ? article.pdf_path_en : article.pdf_path_ja;
+
             const articleHTML = `
                 <h1 class="article-title-main" data-ja="${article.title_ja}" data-en="${article.title_en}">${article.title_en}</h1>
                 <p class="article-meta">
@@ -141,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="date-published">Published: ${article.date}</span>
                 </p>
                 <div class="pdf-viewer">
-                    <embed src="../${article.pdf_path}" type="application/pdf" width="100%" height="1000px" />
+                    <embed src="../${pdfPath}" type="application/pdf" width="100%" height="1000px" />
                 </div>
             `;
             articleContainer.innerHTML = articleHTML;
