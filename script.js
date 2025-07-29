@@ -130,6 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply language after rendering
     }
 
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
     function renderArticlePage() {
         const urlParams = new URLSearchParams(window.location.search);
         const articleId = urlParams.get('id');
@@ -141,15 +145,29 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const pdfPath = lang === 'en' ? article.pdf_path_en : article.pdf_path_ja;
 
+            let pdfViewerHTML;
+            if (isMobile()) {
+                pdfViewerHTML = `
+                    <div class="pdf-viewer-mobile">
+                        <p data-ja="お使いのブラウザでは、PDFの直接表示が難しい場合があります。下のボタンからPDFを開いて閲覧してください。" data-en="Viewing PDFs directly in the browser can be difficult on this device. Please use the button below to open and view the PDF.">Viewing PDFs directly in the browser can be difficult on this device. Please use the button below to open and view the PDF.</p>
+                        <a href="../${pdfPath}" target="_blank" class="btn-read-more" data-ja="PDFを閲覧する" data-en="View PDF">View PDF</a>
+                    </div>
+                `;
+            } else {
+                pdfViewerHTML = `
+                    <div class="pdf-viewer">
+                        <embed src="../${pdfPath}" type="application/pdf" width="100%" height="1000px" />
+                    </div>
+                `;
+            }
+
             const articleHTML = `
                 <h1 class="article-title-main" data-ja="${article.title_ja}" data-en="${article.title_en}">${article.title_en}</h1>
                 <p class="article-meta">
                     <span class="author">${article.author}</span> | 
                     <span class="date-published">Published: ${article.date}</span>
                 </p>
-                <div class="pdf-viewer">
-                    <embed src="../${pdfPath}" type="application/pdf" width="100%" height="1000px" />
-                </div>
+                ${pdfViewerHTML}
             `;
             articleContainer.innerHTML = articleHTML;
             setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply language after rendering

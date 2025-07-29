@@ -892,6 +892,19 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+.pdf-viewer-mobile {
+    margin-top: var(--spacing-l);
+    text-align: center;
+    padding: var(--spacing-xl);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.pdf-viewer-mobile p {
+    margin-bottom: var(--spacing-l);
+}
+
 .article-title {
     font-size: 1.6em;
     color: #004085;
