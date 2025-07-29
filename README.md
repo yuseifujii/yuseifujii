@@ -9,7 +9,7 @@
 ---
 
 Hi, I'm **Yusei Fujii**, a high school student based in Chiba, Japan.  
-I’m passionate about **mathematical research**, **AI-powered web development**.
+I’m passionate about **mathematical research** and **AI service development**.
 
 - 📌 Currently developing [ToreMock](https://toremock.com), an AI-driven TOEFL/TOEIC mock exam platform
 - 📐 Conducted original math research on truncated polyhedra, with academic paper in progress
@@ -27,9 +27,12 @@ I’m passionate about **mathematical research**, **AI-powered web development**
 
 ## 📘 Projects / プロジェクト例
 - [ToreMock](https://toremock.com): 自作AI英語模試サービス
-- [Math Research on Truncated Prisms](https://arxiv.org/): 幾何学の研究とPythonによる数値検証
-- [自動記事生成 & Google Trends分析ツール](https://github.com/): SEOを意識した教育記事の自動生成
-- 
+- [web記事自動生成ツール](https://guthub.com/yuseifujii/toremock2/imagen4.py): SEOを意識した教育記事の自動生成
+- [ショート動画自動生成ツール](https://guthub.com/yuseifujii/): YouTube, TikTok向けのショート動画の自動生成
+- [ポスト自動生成ツール](https://guthub.com/yuseifujii/): Xのポストの自動生成
+- [Math Research on Truncated Prisms](https://arxiv.org/): 2年間の立体幾何学の研究 @静岡大学理学部
+- [高校の数学研究会のwebサイト](yfit.jp): 代表を務める数学研究会『かずけん』の文化祭用webサイト
+- [放物線の法線に関する問題](https://yuseifujii.com/publication/article?id=parabola-normal-line&lang=ja): 放物線の法線に関する問題の研究作品
 
 ---
 
