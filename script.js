@@ -143,6 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (article) {
             document.title = `${article.title_en} | Fujii Journal of Mathematics`;
             
+            // Update SEO metadata
+            updateSEOMetadata(article, lang);
+            
             const pdfPath = lang === 'en' ? article.pdf_path_en : article.pdf_path_ja;
 
             let pdfViewerHTML;
@@ -174,6 +177,79 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             articleContainer.innerHTML = '<p>Article not found.</p>';
         }
+    }
+
+    function updateSEOMetadata(article, lang) {
+        const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+        const title = currentLang === 'ja' ? article.title_ja : article.title_en;
+        const description = currentLang === 'ja' ? article.meta_description_ja : article.meta_description_en;
+        const keywords = currentLang === 'ja' ? article.keywords_ja : article.keywords_en;
+        const ogDescription = currentLang === 'ja' ? article.og_description_ja : article.og_description_en;
+        
+        // Update page title
+        document.title = `${title} | Fujii Journal of Mathematics`;
+        
+        // Update or create meta description
+        updateMetaTag('name', 'description', description);
+        
+        // Update or create meta keywords
+        updateMetaTag('name', 'keywords', keywords);
+        
+        // Update or create Open Graph tags
+        updateMetaTag('property', 'og:title', title);
+        updateMetaTag('property', 'og:description', ogDescription);
+        updateMetaTag('property', 'og:type', 'article');
+        updateMetaTag('property', 'og:url', window.location.href);
+        
+        // Article specific meta tags
+        updateMetaTag('name', 'author', article.author);
+        updateMetaTag('name', 'article:author', article.author);
+        updateMetaTag('name', 'article:published_time', article.date);
+        updateMetaTag('name', 'article:section', currentLang === 'ja' ? '数学' : 'Mathematics');
+        updateMetaTag('name', 'article:tag', keywords);
+        
+        // Schema.org structured data
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": title,
+            "description": description,
+            "author": {
+                "@type": "Person",
+                "name": article.author
+            },
+            "datePublished": article.date,
+            "publisher": {
+                "@type": "Organization",
+                "name": "Fujii Journal of Mathematics"
+            },
+            "about": currentLang === 'ja' ? '数学' : 'Mathematics',
+            "keywords": keywords,
+            "inLanguage": currentLang === 'ja' ? 'ja' : 'en'
+        };
+        
+        updateStructuredData(structuredData);
+    }
+
+    function updateMetaTag(attribute, name, content) {
+        let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+        if (!meta) {
+            meta = document.createElement('meta');
+            meta.setAttribute(attribute, name);
+            document.head.appendChild(meta);
+        }
+        meta.setAttribute('content', content);
+    }
+
+    function updateStructuredData(data) {
+        let script = document.querySelector('script[type="application/ld+json"]#article-schema');
+        if (!script) {
+            script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.id = 'article-schema';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(data);
     }
 });
 
