@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="author">${article.author}</span> | 
                     <span class="date-published">Published: ${article.date}</span>
                 </p>
+                <p class="article-abstract" data-ja="${article.abstract_ja}" data-en="${article.abstract_en}">${article.abstract_en}</p>
                 ${pdfViewerHTML}
             `;
             articleContainer.innerHTML = articleHTML;
@@ -182,9 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSEOMetadata(article, lang) {
         const currentLang = localStorage.getItem('preferredLanguage') || 'en';
         const title = currentLang === 'ja' ? article.title_ja : article.title_en;
-        const description = currentLang === 'ja' ? article.meta_description_ja : article.meta_description_en;
+        const description = currentLang === 'ja' ? article.abstract_ja : article.abstract_en;
         const keywords = currentLang === 'ja' ? article.keywords_ja : article.keywords_en;
-        const ogDescription = currentLang === 'ja' ? article.og_description_ja : article.og_description_en;
+        const ogDescription = currentLang === 'ja' ? article.abstract_ja : article.abstract_en;
         
         // Update page title
         document.title = `${title} | Fujii Journal of Mathematics`;

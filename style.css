@@ -920,7 +920,9 @@ body {
 
 .article-abstract {
     margin-bottom: var(--spacing-l);
-    font-size: 1.05em;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #666;
 }
 
 .btn-read-more {
