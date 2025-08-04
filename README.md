@@ -27,7 +27,7 @@ I’m passionate about **mathematical research** and **AI service development**.
 
 ## 📘 Projects / プロジェクト例
 - [ToreMock](https://toremock.com): 自作AI英語模試サービス
-- [Mt. MATH](mtmath.net): 自作数学ゲーム＆記事サイト
+- [Mt. MATH](https://mtmath.net): 自作数学ゲーム＆記事サイト
 - [web記事自動生成ツール](https://guthub.com/yuseifujii/toremock2/imagen4.py): SEOを意識した教育記事の自動生成
 - [ショート動画自動生成ツール](https://github.com/yuseifujii/video-generator): YouTube, TikTok向けのショート動画の自動生成
 - [ポスト自動生成ツール](https://github.com/yuseifujii/x-automation): Xのポストの自動生成
