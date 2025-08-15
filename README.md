@@ -34,12 +34,11 @@ I’m passionate about **mathematical research** and **AI service development**.
 - [論文：断頭多角柱と重心に関する幾何学的定理の発見](https://arxiv.org/): 2年間の立体幾何学の研究 @静岡大学理学部
 - [高校の数学研究会のwebサイト](https://yfit.jp): 代表を務める数学研究会『かずけん』の文化祭用webサイト
 - [Fujii Journal of Mathematics](https://yuseifujii.com/publication): 独自の数学ジャーナル
-- [放物線の法線に関する問題](https://yuseifujii.com/publication/article?id=parabola-normal-line&lang=ja): 放物線の法線に関する問題の研究作品
 
 ---
 
 ## 🎯 Goals / 将来の目標
-- 科学者であり、かつ起業家として、技術革新により社会課題を解決し、人々の役に立つ。
+- 起業家として、技術革新により社会課題を解決し、人々の役に立つ。
 - 国際的にリーダーシップを発揮し、日本の代表として、世界を変えていく
 
 ---
