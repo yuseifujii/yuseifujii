@@ -31,7 +31,7 @@ I’m passionate about **mathematical research** and **AI service development**.
 - [web記事自動生成ツール](https://guthub.com/yuseifujii/toremock2/imagen4.py): SEOを意識した教育記事の自動生成
 - [ショート動画自動生成ツール](https://github.com/yuseifujii/video-generator): YouTube, TikTok向けのショート動画の自動生成
 - [ポスト自動生成ツール](https://github.com/yuseifujii/x-automation): Xのポストの自動生成
-- [論文：断頭多角柱と重心に関する幾何学的定理の発見]([https://authorea.com/](https://www.authorea.com/users/971690/articles/1342055-on-truncated-prisms-and-geometric-theorems-involving-centroids)): 2年間の立体幾何学の研究 @静岡大学理学部
+- [論文：断頭多角柱と重心に関する幾何学的定理の発見](https://www.authorea.com/users/971690/articles/1342055-on-truncated-prisms-and-geometric-theorems-involving-centroids): 2年間の立体幾何学の研究 @静岡大学理学部
 - [高校の数学研究会のwebサイト](https://yfit.jp): 代表を務める数学研究会『かずけん』の文化祭用webサイト
 - [放物線の法線に関する問題](https://yuseifujii.com/publication/article?id=parabola-normal-line&lang=ja): 放物線の法線に関する問題の研究作品
 
