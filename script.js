@@ -1,260 +1,435 @@
+// ============================================
+// YUSEI FUJII - GLASS AURORA EXPERIENCE
+// Interactive particles & scroll animations
+// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    const slideshow = document.querySelector('.slides-wrapper');
-    const dotsContainer = document.querySelector('.navigation-dots');
-    const langButtons = document.querySelectorAll('.lang-btn');
-
-    if (slideshow && dotsContainer) {
-        const slides = Array.from(slideshow.children);
-        const slideCount = slides.length;
-        let currentSlide = 0;
-
-        // Create navigation dots
-        for (let i = 0; i < slideCount; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => {
-                currentSlide = i;
-                showSlide(currentSlide);
-                updateDots();
-            });
-            dotsContainer.appendChild(dot);
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Initialize GSAP
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // ============================================
+    // PARTICLE SYSTEM
+    // ============================================
+    class ParticleSystem {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.ctx = canvas.getContext('2d');
+            this.particles = [];
+            this.mouse = { x: null, y: null, radius: 150 };
+            this.scrollY = 0;
+            this.animationId = null;
+            
+            this.init();
+            this.animate();
+            this.addEventListeners();
         }
         
-        const dots = Array.from(dotsContainer.children);
-
-        function showSlide(index) {
-            slideshow.style.transform = `translateX(-${index * 25}%)`; // Adjust based on 4 slides
-            updateDots();
+        init() {
+            this.resize();
+            this.createParticles();
         }
-
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+        
+        resize() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        }
+        
+        createParticles() {
+            this.particles = [];
+            const numberOfParticles = Math.min(
+                Math.floor((this.canvas.width * this.canvas.height) / 12000),
+                150
+            );
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                this.particles.push(new Particle(this.canvas));
+            }
+        }
+        
+        addEventListeners() {
+            window.addEventListener('resize', () => {
+                this.resize();
+                this.createParticles();
+            });
+            
+            window.addEventListener('mousemove', (e) => {
+                this.mouse.x = e.clientX;
+                this.mouse.y = e.clientY;
+            });
+            
+            window.addEventListener('mouseout', () => {
+                this.mouse.x = null;
+                this.mouse.y = null;
+            });
+            
+            window.addEventListener('scroll', () => {
+                this.scrollY = window.scrollY;
             });
         }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slideCount;
-            showSlide(currentSlide);
+        
+        animate() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            // Draw connections first (behind particles)
+            this.drawConnections();
+            
+            // Update and draw particles
+            this.particles.forEach(particle => {
+                particle.update(this.mouse, this.scrollY);
+                particle.draw(this.ctx);
+            });
+            
+            this.animationId = requestAnimationFrame(() => this.animate());
         }
-
-        // Initialize slideshow
-        showSlide(0); // Show the first slide initially
-
-        // Auto-advancing slides
-        setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
-
-    // Language switcher logic
-    // Function to set the language
-    function setLanguage(lang) {
-        const translatableElements = document.querySelectorAll('[data-ja]');
-        translatableElements.forEach(el => {
-            const text = el.getAttribute(`data-${lang}`);
-            if (text) {
-                el.innerHTML = text;
+        
+        drawConnections() {
+            const maxDistance = 120;
+            
+            for (let i = 0; i < this.particles.length; i++) {
+                for (let j = i + 1; j < this.particles.length; j++) {
+                    const dx = this.particles[i].x - this.particles[j].x;
+                    const dy = this.particles[i].y - this.particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < maxDistance) {
+                        const opacity = (1 - distance / maxDistance) * 0.15;
+                        this.ctx.beginPath();
+                        this.ctx.strokeStyle = `rgba(0, 255, 242, ${opacity})`;
+                        this.ctx.lineWidth = 0.5;
+                        this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                        this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                        this.ctx.stroke();
+                    }
+                }
             }
-        });
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-        });
-        localStorage.setItem('preferredLanguage', lang);
-    }
-
-    // Event listeners for language buttons
-    langButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const lang = button.getAttribute('data-lang');
-            setLanguage(lang);
-        });
-    });
-
-    // On page load, check for saved language preference
-    const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang) {
-        setLanguage(savedLang);
-    } else {
-        // Default to English if no preference is saved
-        setLanguage('en');
-    }
-
-    // Dynamic Article List Generation
-    const articleListContainer = document.getElementById('article-list-container');
-    if (articleListContainer && typeof articles !== 'undefined') {
-        renderArticleList();
+        }
     }
     
-    // Dynamic Article Page Generation
-    const articleContainer = document.getElementById('article-container');
-    if (articleContainer && typeof articles !== 'undefined') {
-        renderArticlePage();
-    }
-
-    function renderArticleList() {
-        articleListContainer.innerHTML = ''; // Clear existing content
-        articles.forEach(article => {
-            const articleItem = document.createElement('div');
-            articleItem.className = 'article-item';
-
-            let coverImageHTML = '<div class="article-cover-image">';
-            if (article.cover_image) {
-                coverImageHTML += `<img src="${article.cover_image}" alt="${article.alt_text}">`;
-            } else {
-                coverImageHTML += '<!-- Placeholder for cover image -->';
+    class Particle {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.speedY = (Math.random() - 0.5) * 0.3;
+            this.density = Math.random() * 30 + 1;
+            
+            // Color variation
+            const colors = [
+                { r: 0, g: 255, b: 242 },   // Cyan
+                { r: 0, g: 168, b: 255 },   // Blue
+                { r: 177, g: 74, b: 237 },  // Purple
+                { r: 0, g: 255, b: 136 }    // Green
+            ];
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.alpha = Math.random() * 0.5 + 0.3;
+        }
+        
+        update(mouse, scrollY) {
+            // Parallax based on scroll
+            const parallaxFactor = (this.density / 30) * 0.5;
+            const scrollOffset = scrollY * parallaxFactor;
+            
+            // Mouse interaction
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const directionX = dx / distance;
+                    const directionY = dy / distance;
+                    
+                    this.x -= directionX * force * this.density * 0.1;
+                    this.y -= directionY * force * this.density * 0.1;
+                }
             }
-            coverImageHTML += '</div>';
-
-            const articleDetailsHTML = `
-                <div class="article-details">
-                    <div class="journal-tags">
-                        <span class="tag tag-article-type" data-ja="${article.type_ja}" data-en="${article.type_en}">${article.type_en}</span>
-                        <span class="tag tag-lang" data-ja="${article.lang_ja}" data-en="${article.lang_en}">${article.lang_en}</span>
-                        ${article.lang2_en ? `<span class="tag tag-lang" data-ja="${article.lang2_ja}" data-en="${article.lang2_en}">${article.lang2_en}</span>` : ''}
-                    </div>
-                    <h3 class="article-title" data-ja="${article.title_ja}" data-en="${article.title_en}">${article.title_en}</h3>
-                    <p class="article-meta">
-                        <span class="author">${article.author}</span> | 
-                        <span class="date-published">Published: ${article.date}</span>
-                    </p>
-                    <p class="article-abstract" data-ja="${article.abstract_ja}" data-en="${article.abstract_en}">${article.abstract_en}</p>
-                    <div class="article-actions">
-                        <a href="publication/article.html?id=${article.id}&lang=ja" class="btn-read-more" data-ja="日本語版を閲覧" data-en="View Japanese PDF">View Japanese PDF</a>
-                        <a href="publication/article.html?id=${article.id}&lang=en" class="btn-read-more" data-ja="英語版を閲覧" data-en="View English PDF">View English PDF</a>
-                    </div>
-                </div>
-            `;
-
-            articleItem.innerHTML = coverImageHTML + articleDetailsHTML;
-            articleListContainer.appendChild(articleItem);
+            
+            // Natural movement
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            // Return to base with scroll offset
+            const targetY = this.baseY + scrollOffset;
+            this.x += (this.baseX - this.x) * 0.02;
+            this.y += (targetY - this.y) * 0.02;
+            
+            // Wrap around edges
+            if (this.x < 0) this.x = this.canvas.width;
+            if (this.x > this.canvas.width) this.x = 0;
+            if (this.y < -scrollOffset) this.y = this.canvas.height + scrollOffset;
+            if (this.y > this.canvas.height + scrollOffset) this.y = -scrollOffset;
+        }
+        
+        draw(ctx) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha})`;
+            ctx.fill();
+            
+            // Glow effect
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha * 0.2})`;
+            ctx.fill();
+        }
+    }
+    
+    // Initialize particle system
+    const particleCanvas = document.getElementById('particles');
+    new ParticleSystem(particleCanvas);
+    
+    // ============================================
+    // AURORA ANIMATION
+    // ============================================
+    const auroraLayers = document.querySelectorAll('.aurora-layer');
+    
+    // Fade in aurora layers
+    gsap.to(auroraLayers, {
+        opacity: 1,
+        duration: 3,
+        stagger: 0.5,
+        ease: 'power2.out',
+        delay: 0.5
+    });
+    
+    // ============================================
+    // HERO ANIMATIONS
+    // ============================================
+    const heroTimeline = gsap.timeline({
+        defaults: { ease: 'power4.out' }
+    });
+    
+    // Greeting
+    heroTimeline.to('.greeting', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.3
+    });
+    
+    // Name lines
+    heroTimeline.to('.name-line', {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        onComplete: () => {
+            document.querySelectorAll('.name-line').forEach(el => {
+                el.classList.add('animate');
+            });
+        }
+    }, '-=0.6');
+    
+    // Tagline words
+    heroTimeline.to('.tagline-word', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1
+    }, '-=0.6');
+    
+    // Tagline dots
+    heroTimeline.to('.tagline-dot', {
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1
+    }, '-=0.5');
+    
+    // Scroll indicator
+    heroTimeline.to('.scroll-indicator', {
+        opacity: 1,
+        duration: 1
+    }, '-=0.3');
+    
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    
+    // Hero fade out on scroll
+    gsap.to('.hero-content', {
+        opacity: 0,
+        scale: 0.9,
+        filter: 'blur(20px)',
+        scrollTrigger: {
+            trigger: '.spacer',
+            start: 'top bottom',
+            end: 'top center',
+            scrub: 1.5
+        }
+    });
+    
+    gsap.to('.scroll-indicator', {
+        opacity: 0,
+        y: 20,
+        scrollTrigger: {
+            trigger: '.spacer',
+            start: 'top bottom',
+            end: 'top 80%',
+            scrub: 1
+        }
+    });
+    
+    // Aurora intensity based on scroll
+    ScrollTrigger.create({
+        trigger: '.spacer',
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+            const progress = self.progress;
+            const intensity = 0.4 + progress * 0.5;
+            document.querySelector('.aurora').style.opacity = intensity;
+        }
+    });
+    
+    // ============================================
+    // LINKS SECTION ANIMATIONS
+    // ============================================
+    
+    // Links title
+    gsap.to('.links-title', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: '.links-section',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse'
+        }
+    });
+    
+    // Glass cards stagger animation
+    const glassCards = document.querySelectorAll('.glass-card');
+    
+    glassCards.forEach((card, index) => {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            delay: index * 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.links-section',
+                start: 'top 60%',
+                toggleActions: 'play none none reverse'
+            }
         });
-        setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply language after rendering
-    }
-
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-
-    function renderArticlePage() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const articleId = urlParams.get('id');
-        const lang = urlParams.get('lang') || 'ja'; // Default to Japanese
-        const article = articles.find(a => a.id === articleId);
-
-        if (article) {
-            document.title = `${article.title_en} | Fujii Journal of Mathematics`;
+    });
+    
+    // Footer
+    gsap.to('.footer', {
+        opacity: 1,
+        duration: 1,
+        delay: 0.4,
+        scrollTrigger: {
+            trigger: '.links-section',
+            start: 'top 50%',
+            toggleActions: 'play none none reverse'
+        }
+    });
+    
+    // ============================================
+    // GLASS CARD INTERACTIONS
+    // ============================================
+    glassCards.forEach(card => {
+        // 3D tilt effect on mouse move
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
             
-            // Update SEO metadata
-            updateSEOMetadata(article, lang);
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
             
-            const pdfPath = lang === 'en' ? article.pdf_path_en : article.pdf_path_ja;
-
-            let pdfViewerHTML;
-            if (isMobile()) {
-                pdfViewerHTML = `
-                    <div class="pdf-viewer-mobile">
-                        <p data-ja="お使いのブラウザでは、PDFの直接表示が難しい場合があります。下のボタンからPDFを開いて閲覧してください。" data-en="Viewing PDFs directly in the browser can be difficult on this device. Please use the button below to open and view the PDF.">Viewing PDFs directly in the browser can be difficult on this device. Please use the button below to open and view the PDF.</p>
-                        <a href="../${pdfPath}" target="_blank" class="btn-read-more" data-ja="PDFを閲覧する" data-en="View PDF">View PDF</a>
-                    </div>
-                `;
-            } else {
-                pdfViewerHTML = `
-                    <div class="pdf-viewer">
-                        <embed src="../${pdfPath}" type="application/pdf" width="100%" height="1000px" />
-                    </div>
-                `;
-            }
-
-            const articleHTML = `
-                <h1 class="article-title-main" data-ja="${article.title_ja}" data-en="${article.title_en}">${article.title_en}</h1>
-                <p class="article-meta">
-                    <span class="author">${article.author}</span> | 
-                    <span class="date-published">Published: ${article.date}</span>
-                </p>
-                <p class="article-abstract" data-ja="${article.abstract_ja}" data-en="${article.abstract_en}">${article.abstract_en}</p>
-                ${pdfViewerHTML}
-            `;
-            articleContainer.innerHTML = articleHTML;
-            setLanguage(localStorage.getItem('preferredLanguage') || 'en'); // Re-apply language after rendering
+            gsap.to(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                duration: 0.5,
+                ease: 'power2.out',
+                transformPerspective: 1000
+            });
+            
+            // Move glow with cursor
+            const glowX = (x / rect.width) * 100;
+            const glowY = (y / rect.height) * 100;
+            card.style.setProperty('--glow-x', `${glowX}%`);
+            card.style.setProperty('--glow-y', `${glowY}%`);
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                rotateX: 0,
+                rotateY: 0,
+                duration: 0.5,
+                ease: 'power2.out'
+            });
+        });
+    });
+    
+    // ============================================
+    // SMOOTH SCROLL BEHAVIOR
+    // ============================================
+    
+    // Smooth scroll for better experience
+    let scrollTimeout;
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(() => {
+            lastScrollY = window.scrollY;
+        }, 100);
+    }, { passive: true });
+    
+    // ============================================
+    // PERFORMANCE OPTIMIZATION
+    // ============================================
+    
+    // Pause animations when tab is not visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            gsap.globalTimeline.pause();
         } else {
-            articleContainer.innerHTML = '<p>Article not found.</p>';
+            gsap.globalTimeline.resume();
         }
-    }
-
-    function updateSEOMetadata(article, lang) {
-        const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-        const title = currentLang === 'ja' ? article.title_ja : article.title_en;
-        const description = currentLang === 'ja' ? article.abstract_ja : article.abstract_en;
-        const keywords = currentLang === 'ja' ? article.keywords_ja : article.keywords_en;
-        const ogDescription = currentLang === 'ja' ? article.abstract_ja : article.abstract_en;
+    });
+    
+    // ============================================
+    // PREFERS REDUCED MOTION
+    // ============================================
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    if (prefersReducedMotion.matches) {
+        // Disable complex animations
+        gsap.globalTimeline.timeScale(10); // Speed up animations
         
-        // Update page title
-        document.title = `${title} | Fujii Journal of Mathematics`;
-        
-        // Update or create meta description
-        updateMetaTag('name', 'description', description);
-        
-        // Update or create meta keywords
-        updateMetaTag('name', 'keywords', keywords);
-        
-        // Update or create Open Graph tags
-        updateMetaTag('property', 'og:title', title);
-        updateMetaTag('property', 'og:description', ogDescription);
-        updateMetaTag('property', 'og:type', 'article');
-        updateMetaTag('property', 'og:url', window.location.href);
-        
-        // Article specific meta tags
-        updateMetaTag('name', 'author', article.author);
-        updateMetaTag('name', 'article:author', article.author);
-        updateMetaTag('name', 'article:published_time', article.date);
-        updateMetaTag('name', 'article:section', currentLang === 'ja' ? '数学' : 'Mathematics');
-        updateMetaTag('name', 'article:tag', keywords);
-        
-        // Schema.org structured data
-        const structuredData = {
-            "@context": "https://schema.org",
-            "@type": "ScholarlyArticle",
-            "headline": title,
-            "description": description,
-            "author": {
-                "@type": "Person",
-                "name": article.author
-            },
-            "datePublished": article.date,
-            "publisher": {
-                "@type": "Organization",
-                "name": "Fujii Journal of Mathematics"
-            },
-            "about": currentLang === 'ja' ? '数学' : 'Mathematics',
-            "keywords": keywords,
-            "inLanguage": currentLang === 'ja' ? 'ja' : 'en'
-        };
-        
-        updateStructuredData(structuredData);
-    }
-
-    function updateMetaTag(attribute, name, content) {
-        let meta = document.querySelector(`meta[${attribute}="${name}"]`);
-        if (!meta) {
-            meta = document.createElement('meta');
-            meta.setAttribute(attribute, name);
-            document.head.appendChild(meta);
-        }
-        meta.setAttribute('content', content);
-    }
-
-    function updateStructuredData(data) {
-        let script = document.querySelector('script[type="application/ld+json"]#article-schema');
-        if (!script) {
-            script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.id = 'article-schema';
-            document.head.appendChild(script);
-        }
-        script.textContent = JSON.stringify(data);
+        // Show all elements immediately
+        gsap.set([
+            '.greeting',
+            '.name-line',
+            '.tagline-word',
+            '.tagline-dot',
+            '.scroll-indicator',
+            '.links-title',
+            '.glass-card',
+            '.footer'
+        ], {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: 'none'
+        });
     }
 });
-
-// Preloader fade out
-window.addEventListener('load', function() {
-    // This is no longer needed
-}); 
