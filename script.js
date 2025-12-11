@@ -3,12 +3,33 @@
 // Interactive particles & scroll animations
 // ============================================
 
+// Safari scroll position fix - run before DOMContentLoaded
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Force scroll to top for Safari
+    window.scrollTo(0, 0);
+    
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
     
     // Initialize GSAP
     gsap.registerPlugin(ScrollTrigger);
+    
+    // Set initial states explicitly (fixes Safari)
+    gsap.set('.hero-content', {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)'
+    });
+    
+    // Refresh ScrollTrigger after a small delay for Safari
+    setTimeout(() => {
+        ScrollTrigger.refresh();
+    }, 100);
     
     // ============================================
     // PARTICLE SYSTEM
