@@ -10,15 +10,15 @@
     --font-mono: 'JetBrains Mono', monospace;
     
     /* Colors - Deep Navy Chaos */
-    --bg-void: #020816;
-    --bg-deep: #0a1628;
+    --bg-void: #030a18;
+    --bg-deep: #0c1a30;
     
     /* Chaos Palette - Navy × Orange */
     --chaos-orange: #ff6b2c;
     --chaos-amber: #ffaa00;
     --chaos-coral: #ff4757;
-    --chaos-navy: #1e3a5f;
-    --chaos-indigo: #4f46e5;
+    --chaos-navy: #1a4a7a;
+    --chaos-indigo: #3730a3;
     
     /* Glass Properties */
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -84,6 +84,8 @@ body {
     z-index: 0;
     overflow: hidden;
     opacity: 0.7;
+    contain: strict;
+    isolation: isolate;
 }
 
 .aurora-layer {
@@ -93,6 +95,14 @@ body {
     filter: blur(120px);
     opacity: 0;
     transition: opacity 1.5s ease;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+    .aurora-layer {
+        filter: blur(80px);
+    }
 }
 
 .aurora-1 {
@@ -108,8 +118,9 @@ body {
     top: -30%;
     left: -30%;
     background: 
-        radial-gradient(ellipse at 70% 60%, var(--chaos-navy) 0%, transparent 45%),
-        radial-gradient(ellipse at 30% 80%, var(--chaos-indigo) 0%, transparent 40%);
+        radial-gradient(ellipse at 70% 60%, var(--chaos-navy) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 80%, var(--chaos-indigo) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 40%, var(--chaos-navy) 0%, transparent 60%);
     animation: aurora-drift-2 30s ease-in-out infinite;
 }
 
