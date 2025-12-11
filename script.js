@@ -3,15 +3,17 @@
 // Interactive particles & scroll animations
 // ============================================
 
-// Safari scroll position fix - run before DOMContentLoaded
+// Safari/iOS scroll position fix - run before DOMContentLoaded
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 window.scrollTo(0, 0);
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Force scroll to top for Safari
+    // Force scroll to top for Safari/iOS
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -19,17 +21,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize GSAP
     gsap.registerPlugin(ScrollTrigger);
     
-    // Set initial states explicitly (fixes Safari)
+    // iOS 26+ Safari fix: Configure ScrollTrigger for dynamic viewport
+    ScrollTrigger.config({
+        ignoreMobileResize: true
+    });
+    
+    // Set initial states explicitly (fixes Safari/iOS)
     gsap.set('.hero-content', {
         opacity: 1,
         scale: 1,
-        filter: 'blur(0px)'
+        filter: 'blur(0px)',
+        clearProps: 'filter'
     });
+    gsap.set('.scroll-indicator', { opacity: 0 });
     
-    // Refresh ScrollTrigger after a small delay for Safari
-    setTimeout(() => {
-        ScrollTrigger.refresh();
-    }, 100);
+    // iOS Safari viewport fix - monitor visualViewport
+    const refreshScrollTrigger = () => {
+        window.scrollTo(0, 0);
+        ScrollTrigger.refresh(true);
+    };
+    
+    // Multiple refresh attempts for iOS Safari
+    setTimeout(refreshScrollTrigger, 50);
+    setTimeout(refreshScrollTrigger, 200);
+    setTimeout(refreshScrollTrigger, 500);
+    
+    // Listen for visualViewport resize (iOS address bar changes)
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', () => {
+            ScrollTrigger.refresh();
+        });
+    }
     
     // ============================================
     // PARTICLE SYSTEM
@@ -274,16 +296,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // SCROLL ANIMATIONS
     // ============================================
     
-    // Hero fade out on scroll
+    // Hero fade out on scroll - adjusted for iOS 26 Safari
+    // Using 'top+=50 bottom' to add buffer for dynamic viewport
     gsap.to('.hero-content', {
         opacity: 0,
         scale: 0.9,
         filter: 'blur(20px)',
         scrollTrigger: {
             trigger: '.spacer',
-            start: 'top bottom',
+            start: 'top+=50 bottom',
             end: 'top center',
-            scrub: 1.5
+            scrub: 1.5,
+            invalidateOnRefresh: true
         }
     });
     
@@ -292,9 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
         y: 20,
         scrollTrigger: {
             trigger: '.spacer',
-            start: 'top bottom',
+            start: 'top+=50 bottom',
             end: 'top 80%',
-            scrub: 1
+            scrub: 1,
+            invalidateOnRefresh: true
         }
     });
     

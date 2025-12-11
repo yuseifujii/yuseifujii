@@ -172,17 +172,25 @@ body {
 .hero {
     min-height: 100vh;
     min-height: 100dvh;
+    min-height: 100svh; /* Small viewport height for iOS Safari */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: var(--space-md);
+    padding-top: env(safe-area-inset-top, var(--space-md));
     position: relative;
 }
 
 .hero-content {
     text-align: center;
     max-width: 90vw;
+    /* iOS Safari fix - ensure no blur on initial load */
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1);
+    will-change: opacity, transform, filter;
 }
 
 /* Greeting */
@@ -334,6 +342,9 @@ body {
 /* === SPACER === */
 .spacer {
     height: 100vh;
+    height: 100svh; /* iOS Safari small viewport */
+    /* Add extra padding top to prevent premature trigger on iOS */
+    padding-top: 50px;
 }
 
 /* === LINKS SECTION === */
