@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (distance < maxDistance) {
                         const opacity = (1 - distance / maxDistance) * 0.15;
                         this.ctx.beginPath();
-                        this.ctx.strokeStyle = `rgba(0, 255, 242, ${opacity})`;
+                        this.ctx.strokeStyle = `rgba(255, 140, 50, ${opacity})`;
                         this.ctx.lineWidth = 0.5;
                         this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                         this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
@@ -122,10 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Color variation
             const colors = [
-                { r: 0, g: 255, b: 242 },   // Cyan
-                { r: 0, g: 168, b: 255 },   // Blue
-                { r: 177, g: 74, b: 237 },  // Purple
-                { r: 0, g: 255, b: 136 }    // Green
+                { r: 255, g: 107, b: 44 },  // Orange
+                { r: 255, g: 170, b: 0 },   // Amber
+                { r: 255, g: 71, b: 87 },   // Coral
+                { r: 79, g: 70, b: 229 }    // Indigo
             ];
             this.color = colors[Math.floor(Math.random() * colors.length)];
             this.alpha = Math.random() * 0.5 + 0.3;

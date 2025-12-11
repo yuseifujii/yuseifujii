@@ -9,26 +9,26 @@
     --font-display: 'Syne', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     
-    /* Colors - Deep Space Aurora */
-    --bg-void: #030014;
-    --bg-deep: #0a0a1a;
+    /* Colors - Deep Navy Chaos */
+    --bg-void: #020816;
+    --bg-deep: #0a1628;
     
-    /* Aurora Palette */
-    --aurora-cyan: #00fff2;
-    --aurora-blue: #00a8ff;
-    --aurora-purple: #b14aed;
-    --aurora-pink: #ff2d92;
-    --aurora-green: #00ff88;
+    /* Chaos Palette - Navy × Orange */
+    --chaos-orange: #ff6b2c;
+    --chaos-amber: #ffaa00;
+    --chaos-coral: #ff4757;
+    --chaos-navy: #1e3a5f;
+    --chaos-indigo: #4f46e5;
     
     /* Glass Properties */
     --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-highlight: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 166, 77, 0.12);
+    --glass-highlight: rgba(255, 107, 44, 0.2);
     
     /* Text */
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.6);
-    --text-muted: rgba(255, 255, 255, 0.3);
+    --text-muted: rgba(255, 170, 0, 0.4);
     
     /* Spacing */
     --space-xs: 0.5rem;
@@ -99,8 +99,8 @@ body {
     top: -50%;
     left: -50%;
     background: 
-        radial-gradient(ellipse at 20% 20%, var(--aurora-cyan) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 30%, var(--aurora-blue) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 20%, var(--chaos-orange) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, var(--chaos-amber) 0%, transparent 40%);
     animation: aurora-drift-1 25s ease-in-out infinite;
 }
 
@@ -108,8 +108,8 @@ body {
     top: -30%;
     left: -30%;
     background: 
-        radial-gradient(ellipse at 70% 60%, var(--aurora-purple) 0%, transparent 45%),
-        radial-gradient(ellipse at 30% 80%, var(--aurora-pink) 0%, transparent 40%);
+        radial-gradient(ellipse at 70% 60%, var(--chaos-navy) 0%, transparent 45%),
+        radial-gradient(ellipse at 30% 80%, var(--chaos-indigo) 0%, transparent 40%);
     animation: aurora-drift-2 30s ease-in-out infinite;
 }
 
@@ -117,7 +117,7 @@ body {
     top: -40%;
     left: -40%;
     background: 
-        radial-gradient(ellipse at 50% 50%, var(--aurora-green) 0%, transparent 50%);
+        radial-gradient(ellipse at 50% 50%, var(--chaos-coral) 0%, transparent 50%);
     animation: aurora-drift-3 35s ease-in-out infinite;
 }
 
@@ -188,7 +188,7 @@ body {
 .greeting-line {
     width: 60px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--aurora-cyan));
+    background: linear-gradient(90deg, transparent, var(--chaos-orange));
 }
 
 .greeting-text {
@@ -197,7 +197,7 @@ body {
     font-weight: 300;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--aurora-cyan);
+    color: var(--chaos-orange);
 }
 
 /* Name */
@@ -220,9 +220,9 @@ body {
     background: linear-gradient(
         135deg,
         var(--text-primary) 0%,
-        var(--aurora-cyan) 25%,
-        var(--aurora-purple) 50%,
-        var(--aurora-pink) 75%,
+        var(--chaos-orange) 25%,
+        var(--chaos-amber) 50%,
+        var(--chaos-coral) 75%,
         var(--text-primary) 100%
     );
     background-size: 300% 300%;
@@ -262,7 +262,7 @@ body {
 }
 
 .tagline-dot {
-    color: var(--aurora-cyan);
+    color: var(--chaos-amber);
     opacity: 0;
 }
 
@@ -292,7 +292,7 @@ body {
 .scroll-wheel {
     width: 4px;
     height: 8px;
-    background: var(--aurora-cyan);
+    background: var(--chaos-orange);
     border-radius: 2px;
     position: absolute;
     top: 8px;
@@ -353,7 +353,7 @@ body {
 }
 
 .links-title span {
-    background: linear-gradient(135deg, var(--text-primary), var(--aurora-cyan));
+    background: linear-gradient(135deg, var(--text-primary), var(--chaos-orange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -384,9 +384,9 @@ body {
     inset: -2px;
     background: linear-gradient(
         135deg,
-        var(--aurora-cyan) 0%,
-        var(--aurora-purple) 50%,
-        var(--aurora-pink) 100%
+        var(--chaos-orange) 0%,
+        var(--chaos-amber) 50%,
+        var(--chaos-coral) 100%
     );
     border-radius: 22px;
     opacity: 0;
@@ -482,9 +482,9 @@ body {
 .glass-card:hover .card-border {
     background: linear-gradient(
         135deg,
-        var(--aurora-cyan) 0%,
-        var(--aurora-purple) 50%,
-        var(--aurora-pink) 100%
+        var(--chaos-orange) 0%,
+        var(--chaos-amber) 50%,
+        var(--chaos-coral) 100%
     );
 }
 
@@ -495,7 +495,7 @@ body {
 .glass-card:hover .card-arrow {
     transform: translateX(0);
     opacity: 1;
-    color: var(--aurora-cyan);
+    color: var(--chaos-orange);
 }
 
 .glass-card:active .card-content {
