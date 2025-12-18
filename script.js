@@ -1,57 +1,19 @@
 // ============================================
 // YUSEI FUJII - GLASS AURORA EXPERIENCE
-// Interactive particles & scroll animations
+// Interactive particles & animations
 // ============================================
 
-// Safari/iOS scroll position fix - run before DOMContentLoaded
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-window.scrollTo(0, 0);
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Force scroll to top for Safari/iOS
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
     
-    // Initialize GSAP
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // iOS 26+ Safari fix: Configure ScrollTrigger for dynamic viewport
-    ScrollTrigger.config({
-        ignoreMobileResize: true
-    });
-    
-    // Set initial states explicitly (fixes Safari/iOS)
+    // Set initial states explicitly
     gsap.set('.hero-content', {
         opacity: 1,
         scale: 1,
         filter: 'blur(0px)',
         clearProps: 'filter'
     });
-    gsap.set('.scroll-indicator', { opacity: 0 });
-    
-    // iOS Safari viewport fix - monitor visualViewport
-    const refreshScrollTrigger = () => {
-        window.scrollTo(0, 0);
-        ScrollTrigger.refresh(true);
-    };
-    
-    // Multiple refresh attempts for iOS Safari
-    setTimeout(refreshScrollTrigger, 50);
-    setTimeout(refreshScrollTrigger, 200);
-    setTimeout(refreshScrollTrigger, 500);
-    
-    // Listen for visualViewport resize (iOS address bar changes)
-    if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', () => {
-            ScrollTrigger.refresh();
-        });
-    }
     
     // ============================================
     // PARTICLE SYSTEM
@@ -62,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.ctx = canvas.getContext('2d');
             this.particles = [];
             this.mouse = { x: null, y: null, radius: 150 };
-            this.scrollY = 0;
             this.animationId = null;
             
             this.init();
@@ -107,10 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.mouse.x = null;
                 this.mouse.y = null;
             });
-            
-            window.addEventListener('scroll', () => {
-                this.scrollY = window.scrollY;
-            });
         }
         
         animate() {
@@ -121,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Update and draw particles
             this.particles.forEach(particle => {
-                particle.update(this.mouse, this.scrollY);
+                particle.update(this.mouse);
                 particle.draw(this.ctx);
             });
             
@@ -174,11 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.alpha = Math.random() * 0.5 + 0.3;
         }
         
-        update(mouse, scrollY) {
-            // Parallax based on scroll
-            const parallaxFactor = (this.density / 30) * 0.5;
-            const scrollOffset = scrollY * parallaxFactor;
-            
+        update(mouse) {
             // Mouse interaction
             if (mouse.x !== null && mouse.y !== null) {
                 const dx = mouse.x - this.x;
@@ -199,16 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x += this.speedX;
             this.y += this.speedY;
             
-            // Return to base with scroll offset
-            const targetY = this.baseY + scrollOffset;
+            // Return to base
             this.x += (this.baseX - this.x) * 0.02;
-            this.y += (targetY - this.y) * 0.02;
+            this.y += (this.baseY - this.y) * 0.02;
             
             // Wrap around edges
             if (this.x < 0) this.x = this.canvas.width;
             if (this.x > this.canvas.width) this.x = 0;
-            if (this.y < -scrollOffset) this.y = this.canvas.height + scrollOffset;
-            if (this.y > this.canvas.height + scrollOffset) this.y = -scrollOffset;
+            if (this.y < 0) this.y = this.canvas.height;
+            if (this.y > this.canvas.height) this.y = 0;
         }
         
         draw(ctx) {
@@ -286,158 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.1
     }, '-=0.5');
     
-    // Scroll indicator
-    heroTimeline.to('.scroll-indicator', {
+    // Minimal links
+    heroTimeline.to('.minimal-link', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out'
+    }, '-=0.3');
+    
+    // Footer
+    heroTimeline.to('.footer', {
         opacity: 1,
         duration: 1
     }, '-=0.3');
-    
-    // ============================================
-    // SCROLL ANIMATIONS
-    // ============================================
-    
-    // Hero fade out on scroll - adjusted for iOS 26 Safari
-    // Using 'top+=50 bottom' to add buffer for dynamic viewport
-    gsap.to('.hero-content', {
-        opacity: 0,
-        scale: 0.9,
-        filter: 'blur(20px)',
-        scrollTrigger: {
-            trigger: '.spacer',
-            start: 'top+=50 bottom',
-            end: 'top center',
-            scrub: 1.5,
-            invalidateOnRefresh: true
-        }
-    });
-    
-    gsap.to('.scroll-indicator', {
-        opacity: 0,
-        y: 20,
-        scrollTrigger: {
-            trigger: '.spacer',
-            start: 'top+=50 bottom',
-            end: 'top 80%',
-            scrub: 1,
-            invalidateOnRefresh: true
-        }
-    });
-    
-    // Aurora intensity based on scroll
-    ScrollTrigger.create({
-        trigger: '.spacer',
-        start: 'top bottom',
-        end: 'bottom top',
-        onUpdate: (self) => {
-            const progress = self.progress;
-            const intensity = 0.4 + progress * 0.5;
-            document.querySelector('.aurora').style.opacity = intensity;
-        }
-    });
-    
-    // ============================================
-    // LINKS SECTION ANIMATIONS
-    // ============================================
-    
-    // Links title
-    gsap.to('.links-title', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.links-section',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        }
-    });
-    
-    // Glass cards stagger animation
-    const glassCards = document.querySelectorAll('.glass-card');
-    
-    glassCards.forEach((card, index) => {
-        gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.links-section',
-                start: 'top 60%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-    
-    // Footer
-    gsap.to('.footer', {
-        opacity: 1,
-        duration: 1,
-        delay: 0.4,
-        scrollTrigger: {
-            trigger: '.links-section',
-            start: 'top 50%',
-            toggleActions: 'play none none reverse'
-        }
-    });
-    
-    // ============================================
-    // GLASS CARD INTERACTIONS
-    // ============================================
-    glassCards.forEach(card => {
-        // 3D tilt effect on mouse move
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                duration: 0.5,
-                ease: 'power2.out',
-                transformPerspective: 1000
-            });
-            
-            // Move glow with cursor
-            const glowX = (x / rect.width) * 100;
-            const glowY = (y / rect.height) * 100;
-            card.style.setProperty('--glow-x', `${glowX}%`);
-            card.style.setProperty('--glow-y', `${glowY}%`);
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotateX: 0,
-                rotateY: 0,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
-        });
-    });
-    
-    // ============================================
-    // SMOOTH SCROLL BEHAVIOR
-    // ============================================
-    
-    // Smooth scroll for better experience
-    let scrollTimeout;
-    let lastScrollY = window.scrollY;
-    
-    window.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        
-        scrollTimeout = setTimeout(() => {
-            lastScrollY = window.scrollY;
-        }, 100);
-    }, { passive: true });
     
     // ============================================
     // PERFORMANCE OPTIMIZATION
@@ -467,9 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '.name-line',
             '.tagline-word',
             '.tagline-dot',
-            '.scroll-indicator',
-            '.links-title',
-            '.glass-card',
+            '.minimal-link',
             '.footer'
         ], {
             opacity: 1,

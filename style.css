@@ -58,7 +58,7 @@ body {
     font-family: var(--font-display);
     background: var(--bg-void);
     color: var(--text-primary);
-    overflow-x: hidden;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -83,7 +83,7 @@ body {
     height: 100%;
     z-index: 0;
     overflow: hidden;
-    opacity: 0.7;
+    opacity: 0.4;
     contain: strict;
     isolation: isolate;
 }
@@ -109,27 +109,28 @@ body {
     top: -50%;
     left: -50%;
     background: 
-        radial-gradient(ellipse at 20% 20%, var(--chaos-orange) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 30%, var(--chaos-amber) 0%, transparent 40%);
-    animation: aurora-drift-1 25s ease-in-out infinite;
+        radial-gradient(ellipse at 20% 20%, var(--chaos-navy) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, var(--chaos-navy) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 30%, var(--chaos-indigo) 0%, transparent 50%);
+    animation: aurora-drift-1 60s ease-in-out infinite;
 }
 
 .aurora-2 {
     top: -30%;
     left: -30%;
     background: 
-        radial-gradient(ellipse at 70% 60%, var(--chaos-navy) 0%, transparent 55%),
-        radial-gradient(ellipse at 30% 80%, var(--chaos-indigo) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 40%, var(--chaos-navy) 0%, transparent 60%);
-    animation: aurora-drift-2 30s ease-in-out infinite;
+        radial-gradient(ellipse at 70% 60%, var(--chaos-navy) 0%, transparent 65%),
+        radial-gradient(ellipse at 30% 80%, var(--chaos-indigo) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 40%, var(--chaos-amber) 0%, transparent 35%);
+    animation: aurora-drift-2 70s ease-in-out infinite;
 }
 
 .aurora-3 {
     top: -40%;
     left: -40%;
     background: 
-        radial-gradient(ellipse at 50% 50%, var(--chaos-coral) 0%, transparent 50%);
-    animation: aurora-drift-3 35s ease-in-out infinite;
+        radial-gradient(ellipse at 85% 25%, var(--chaos-orange) 0%, transparent 35%);
+    animation: aurora-drift-3 80s ease-in-out infinite;
 }
 
 @keyframes aurora-drift-1 {
@@ -212,8 +213,8 @@ body {
 
 .greeting-text {
     font-family: var(--font-mono);
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    font-weight: 300;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--chaos-orange);
@@ -229,7 +230,7 @@ body {
 }
 
 .name-line {
-    font-size: clamp(3.6rem, 16vw, 12.5rem);
+    font-size: clamp(2.5rem, 10vw, 8rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     opacity: 0;
@@ -268,6 +269,7 @@ body {
     justify-content: center;
     gap: var(--space-sm);
     flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
 }
 
 .tagline-word {
@@ -283,6 +285,65 @@ body {
 .tagline-dot {
     color: var(--chaos-amber);
     opacity: 0;
+}
+
+/* === MINIMAL LINKS === */
+.minimal-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.minimal-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.4s var(--ease-out-expo);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.minimal-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--chaos-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(255, 107, 44, 0.2);
+}
+
+.minimal-link[data-platform="twitter"]:hover {
+    color: #1DA1F2;
+    border-color: #1DA1F2;
+    box-shadow: 0 8px 32px rgba(29, 161, 242, 0.2);
+}
+
+.minimal-link[data-platform="instagram"]:hover {
+    color: #E4405F;
+    border-color: #E4405F;
+    box-shadow: 0 8px 32px rgba(228, 64, 95, 0.2);
+}
+
+.minimal-link[data-platform="linkedin"]:hover {
+    color: #0A66C2;
+    border-color: #0A66C2;
+    box-shadow: 0 8px 32px rgba(10, 102, 194, 0.2);
+}
+
+.minimal-link[data-platform="github"]:hover {
+    color: #8957e5;
+    border-color: #8957e5;
+    box-shadow: 0 8px 32px rgba(137, 87, 229, 0.2);
 }
 
 /* Scroll Indicator */
@@ -547,7 +608,10 @@ body {
 
 /* === FOOTER === */
 .footer {
-    margin-top: var(--space-md);
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
 }
 
