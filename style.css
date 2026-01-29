@@ -236,9 +236,7 @@ body {
     color: var(--text-primary);
 }
 
-.name-line.animate {
-    /* kept for compatibility */
-}
+
 
 @keyframes gradient-shift {
 
